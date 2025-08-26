@@ -1,0 +1,19 @@
+# Force GitHub to recognize file types correctly
+*.html linguist-language=HTML
+*.css linguist-language=CSS
+*.js linguist-language=JavaScript
+*.py linguist-language=Python
+*.sh linguist-language=Shell
+*.md linguist-language=Markdown
+*.pdf linguist-documentation
+*.jpg linguist-documentation
+*.jpeg linguist-documentation
+*.png linguist-documentation
+*.ico linguist-documentation
+
+# Exclude certain files from language stats
+*.pdf linguist-vendored
+*.jpg linguist-vendored
+*.jpeg linguist-vendored
+*.png linguist-vendored
+*.ico linguist-vendored
