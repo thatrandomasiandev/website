@@ -3309,7 +3309,10 @@ body {
 }
 
 .resume-modal-close {
-    color: white;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    color: black;
     font-size: 2rem;
     font-weight: bold;
     cursor: pointer;

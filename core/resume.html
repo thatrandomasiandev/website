@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Joshua Terranova - USC Resume</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="scripts/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -26,11 +26,27 @@
             margin-bottom: 1rem;
         }
         
+
+        
         .resume-header h1 {
             font-size: 18pt;
             color: #990000;
             margin: 0 0 0.25rem 0;
             font-weight: 700;
+        }
+        
+        .sensitive-info-note {
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-top: 1px solid #ddd;
+            text-align: center;
+        }
+        
+        .sensitive-info-note p {
+            margin: 0;
+            font-size: 9pt;
+            color: #666;
+            font-style: italic;
         }
         
         .resume-header p {
@@ -191,9 +207,6 @@
     <div class="resume-page">
         <!-- Header -->
         <div class="resume-header">
-            <div class="usc-logo-header">
-                <img src="images/div/USC.png" alt="USC Logo" class="usc-logo">
-            </div>
             <h1>JOSHUA TERRANOVA</h1>
             <div class="contact-info">
                 <div class="contact-row">
@@ -236,12 +249,12 @@
                 <p class="company">AI/ML Program</p>
                 <p>Studied foundational and intermediate knowledge of Artificial Intelligence, LLMs, and Machine Learning</p>
             </div>
-            <div class="resume-item">
-                <h3>Lycée International School of Los Angeles</h3>
-                <p class="company">High School Diploma</p>
-                <p class="date">Graduated 2023</p>
-                <p>International Baccalaureate (IB)-certified high school program</p>
-            </div>
+                                    <div class="resume-item">
+                            <h3>Lycée International School of Los Angeles</h3>
+                            <p class="company">High School Diploma</p>
+                            <p class="date">Graduated 2024</p>
+                            <p>International Baccalaureate (IB)-certified high school program</p>
+                        </div>
         </div>
 
         <!-- Experience -->
@@ -258,7 +271,7 @@
                 </ul>
             </div>
             <div class="resume-item">
-                <h3>NASA L'SPACE NPWEE Intern</h3>
+                <h3>NASA L'SPACE NPWEE Intern*</h3>
                 <p class="company">NASA</p>
                 <p class="date">May 2025 - August 2025</p>
                 <ul>
@@ -297,6 +310,9 @@
                     <li>Gained experience in engineering analysis and design optimization</li>
                 </ul>
             </div>
+            <div class="sensitive-info-note">
+                <p><em>* Certain tasks and responsibilities were omitted due to sensitive, proprietary, and highly confidential information.</em></em></p>
+            </div>
         </div>
 
         <!-- Projects -->
@@ -312,12 +328,30 @@
                 </ul>
             </div>
             <div class="resume-item">
-                <h3>Tower of Hanoi - Demonstration of Recursion</h3>
+                <h3>Study-Image Recognition in AI (Pneumonia)</h3>
+                <p class="company">LaTeX Research Project</p>
+                <ul>
+                    <li>Conducted research on AI image recognition for medical diagnosis applications</li>
+                    <li>Analyzed machine learning algorithms for pneumonia detection in medical imaging</li>
+                    <li>GitHub: github.com/thatrandomasiandev/LaTeX-Projects</li>
+                </ul>
+            </div>
+            <div class="resume-item">
+                <h3>Study-Radiation in Space</h3>
+                <p class="company">LaTeX Research Project</p>
+                <ul>
+                    <li>Researched radiation effects and protection methods for space exploration</li>
+                    <li>Analyzed scientific data and documented findings in academic format</li>
+                    <li>GitHub: github.com/thatrandomasiandev/LaTeX-Projects</li>
+                </ul>
+            </div>
+            <div class="resume-item">
+                <h3>Study-Tower of Hanoi (Recursion)</h3>
                 <p class="company">LaTeX Research Project</p>
                 <ul>
                     <li>Authored research project on recursion concepts and mathematical applications</li>
                     <li>Implemented algorithm in Python with pseudocode and mathematical analysis</li>
-                    <li>Demonstrated recursion principles using Tower of Hanoi puzzle</li>
+                    <li>GitHub: github.com/thatrandomasiandev/LaTeX-Projects</li>
                 </ul>
             </div>
             <div class="resume-item">
@@ -327,15 +361,26 @@
                     <li>Created responsive website to showcase skills, experience, and professional story</li>
                     <li>Demonstrated proficiency in modern web development technologies</li>
                     <li>Implemented interactive features and professional design</li>
+                    <li>GitHub: github.com/thatrandomasiandev/website</li>
                 </ul>
             </div>
             <div class="resume-item">
-                <h3>Clipboard Manager for macOS</h3>
+                <h3>Clipboard Manager/File Manager for macOS</h3>
                 <p class="company">Swift/SwiftUI Application</p>
                 <ul>
                     <li>Developed native macOS application using Swift and SwiftUI in Xcode</li>
                     <li>Implemented clipboard tracking, filtering, tagging, and search functionality</li>
                     <li>Added iCloud integration and automatic history management</li>
+                    <li>GitHub: github.com/thatrandomasiandev/App-Development</li>
+                </ul>
+            </div>
+            <div class="resume-item">
+                <h3>Physics Calculator</h3>
+                <p class="company">HTML5 Application</p>
+                <ul>
+                    <li>Built web-based calculator for solving complex physics equations</li>
+                    <li>Implemented mathematical functions and user-friendly interface</li>
+                    <li>GitHub: github.com/thatrandomasiandev/Physics</li>
                 </ul>
             </div>
         </div>
@@ -344,17 +389,18 @@
         <div class="resume-section">
             <h2>SKILLS</h2>
             <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Programming Languages</h3>
-                    <ul>
-                        <li>Python (Advanced)</li>
-                        <li>C++ (Intermediate)</li>
-                        <li>JavaScript (Intermediate)</li>
-                        <li>HTML5/CSS3 (Advanced)</li>
-                        <li>Swift/SwiftUI (Intermediate)</li>
-                        <li>LaTeX (Intermediate)</li>
-                    </ul>
-                </div>
+                                        <div class="skill-category">
+                            <h3>Programming Languages</h3>
+                            <ul>
+                                <li>Python (Experienced)</li>
+                                <li>C++ (Proficient)</li>
+                                <li>Java (Proficient)</li>
+                                <li>JavaScript (Experienced)</li>
+                                <li>HTML5/CSS3 (Experienced)</li>
+                                <li>Swift/SwiftUI (Intermediate)</li>
+                                <li>LaTeX (Intermediate)</li>
+                            </ul>
+                        </div>
                 <div class="skill-category">
                     <h3>Software & Tools</h3>
                     <ul>
@@ -390,10 +436,14 @@
         <div class="resume-section">
             <h2>AWARDS & ACHIEVEMENTS</h2>
             <ul class="awards-list">
-                <li><strong>Dean's List</strong> - USC Viterbi School of Engineering</li>
+                <li><strong>A.S. Mathematics</strong></li>
+                <li><strong>Summa Cum Laude</strong> - A.S. Mathematics</li>
+                <li><strong>Full Time Dean's Honor List</strong> - A.S. Mathematics</li>
+                <li><strong>President's Honors</strong> - A.S. Mathematics</li>
+                <li><strong>Dean's List</strong> - Johns Hopkins Center For Talented Youth</li>
+                <li><strong>IB Diploma Program</strong> - Lycée International Los Angeles</li>
+                <li><strong>Autodesk Digital Design Competition</strong> - Finalist</li>
                 <li><strong>CyberPatriots Cybersecurity Competition</strong> - Semifinalist</li>
-                <li><strong>Autodesk Digital Design Competition</strong> - Participant</li>
-                <li><strong>IB Diploma Program</strong> - Lycée International</li>
             </ul>
         </div>
 

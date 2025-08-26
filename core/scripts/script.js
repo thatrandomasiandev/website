@@ -507,7 +507,7 @@ console.log('Enhanced website loaded successfully! 🚀');
             "travelling",
             "decorating my Hydro Flask",
             "hanging out with friends",
-            "snowboarding",
+    
             "3D printing",
             "Playing Tennis"
         ]

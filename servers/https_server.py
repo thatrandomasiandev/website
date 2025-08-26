@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 
 # Configuration
-PORT = 8443
+PORT = 8000
 CERT_FILE = 'ssl/cert.pem'
 KEY_FILE = 'ssl/key.pem'
 
@@ -31,6 +31,9 @@ def main():
         print(f"Expected: {CERT_FILE} and {KEY_FILE}")
         print("Run the setup script first to generate SSL certificates.")
         return
+    
+    # Change to core directory before starting server
+    os.chdir('core')
     
     # Create HTTPS server
     httpd = socketserver.TCPServer(("", PORT), MyHTTPRequestHandler)

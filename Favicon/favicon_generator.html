@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Favicon Generator</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #333;
+            font-family: Arial, sans-serif;
+        }
+        .favicon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #000000 0%, #ff6600 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        .preview {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .sizes {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .size {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+        .size-label {
+            font-size: 12px;
+            color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white;">Favicon Preview</h1>
+    
+    <div class="preview">
+        <div class="favicon">JT</div>
+        <div style="color: white;">
+            <p><strong>Black to Orange Gradient with White JT</strong></p>
+            <p>This will be your website's favicon</p>
+        </div>
+    </div>
+    
+    <div class="sizes">
+        <div class="size">
+            <div class="favicon" style="width: 16px; height: 16px; font-size: 8px;">JT</div>
+            <div class="size-label">16x16</div>
+        </div>
+        <div class="size">
+            <div class="favicon" style="width: 32px; height: 32px; font-size: 14px;">JT</div>
+            <div class="size-label">32x32</div>
+        </div>
+        <div class="size">
+            <div class="favicon" style="width: 48px; height: 48px; font-size: 20px;">JT</div>
+            <div class="size-label">48x48</div>
+        </div>
+        <div class="size">
+            <div class="favicon" style="width: 64px; height: 64px; font-size: 26px;">JT</div>
+            <div class="size-label">64x64</div>
+        </div>
+    </div>
+    
+    <div style="margin-top: 30px; color: #ccc;">
+        <p>To use this as your favicon:</p>
+        <ol>
+            <li>Right-click on the 32x32 version above</li>
+            <li>Save image as "favicon.ico"</li>
+            <li>Place it in your website root directory</li>
+        </ol>
+    </div>
+</body>
+</html>

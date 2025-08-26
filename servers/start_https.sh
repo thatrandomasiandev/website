@@ -23,5 +23,5 @@ if [ ! -f "ssl/cert.pem" ] || [ ! -f "ssl/key.pem" ]; then
 fi
 
 # Start the HTTPS server
-echo "🚀 Starting HTTPS server on https://localhost:8443"
-python3 https_server.py
+echo "🚀 Starting HTTPS server on https://localhost:8000"
+cd core && python3 https_server.py
