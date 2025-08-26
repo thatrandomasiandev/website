@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Terranova - Computer Science Student</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <canvas id="mac-bg-canvas"></canvas>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Joshua Terranova</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="skills.html" class="nav-link">Skills</a>
+                </li>
+                <li class="nav-item">
+                    <a href="projects.html" class="nav-link">Projects & Achievements</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#resume" class="nav-link">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <h1 class="hero-title">
+                        <span class="hero-title-line">Hi, I'm</span>
+                        <span class="hero-title-name">Joshua</span>
+                    </h1>
+                    <p class="hero-subtitle">Computer Science Student @ USC</p>
+                    <p class="hero-description">Passionate about creating innovative software solutions and exploring the intersection of technology and creativity. I turn complex problems into elegant, user-friendly applications.</p>
+                    
+                    <div class="hero-buttons">
+                        <a href="about.html" class="btn btn-primary">
+                            <span>Learn More About Me</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn-secondary">
+                            <span>Get In Touch</span>
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">40+</span>
+                            <span class="hero-stat-label">Projects</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">3+</span>
+                            <span class="hero-stat-label">Years</span>
+                        </div>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">6+</span>
+                            <span class="hero-stat-label">Internships</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-container">
+                    <img src="images/div/7.jpeg" alt="Lake Tahoe" class="hero-tahoe-image">
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <span>Scroll to explore</span>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    <section id="resume" class="resume">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Resume</span>
+                </div>
+                                    <h2 class="section-title">My Professional Journey</h2>
+                    <p class="section-subtitle">Explore my experience in computer science, NASA internships, and technical projects</p>
+            </div>
+            <div class="resume-content">
+                <div class="resume-preview">
+                    <div class="resume-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3>Joshua Terranova</h3>
+                    <p>Computer Science Student at USC with extensive NASA internship experience, CAD expertise, and a passion for innovative technology solutions.</p>
+                    <div class="resume-actions">
+                        <a href="resume.html" class="btn btn-primary" target="_blank">
+                            <i class="fas fa-eye"></i>
+                            <span>View Resume</span>
+                        </a>
+                        <a href="#" class="btn btn-secondary" onclick="printResume()">
+                            <i class="fas fa-print"></i>
+                            <span>Print/PDF</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-user"></i>
+                    <span>About Me</span>
+                </div>
+                <h2>Welcome to My World</h2>
+                <p>Get to know me beyond the code</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <div class="about-card">
+                        <div class="about-card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Who I Am</h3>
+                        <p>I'm Joshua Terranova, a Computer Science student at the University of Southern California. I'm passionate about technology, innovation, and creating solutions that make a difference in people's lives.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-card-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3>What Drives Me</h3>
+                        <p>I love solving complex problems and turning innovative ideas into reality through code. Whether it's building applications, exploring new technologies, or contributing to open-source projects, I'm always excited to learn and create.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="about-card-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h3>Beyond Coding</h3>
+                        <p>When I'm not immersed in code, you'll find me traveling to new places, playing tennis, experimenting with 3D printing, or simply enjoying a good cup of coffee while brainstorming my next project.</p>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h4>40+</h4>
+                        <p>Projects Built</p>
+                        <p>Physical/Digital</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h4>3+</h4>
+                        <p>Years Coding</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h4>6+</h4>
+                        <p>Internships</p>
+                        <p>NASA, Toyota, and more</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Preview Section -->
+    <section id="skills-preview" class="skills-preview">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-code"></i>
+                    <span>Skills</span>
+                </div>
+                <h2>What I Do</h2>
+                <p>Technologies and tools I work with</p>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Software Development</h3>
+                    <p>My most polished skill. I'm proficient in C++, and Python. I'm also familiar with Java, JavaScript, and HTML/CSS.</p>
+                    <div class="skill-tags">
+                        <span>C++</span>
+                        <span>Python</span>
+                        <span>HTML/CSS</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Mobile Engineering</h3>
+                    <p>Engineering mobile applications for iOS and macOS. I mainly use Swift and SwiftUI to create applications that are centered around productivity and organization.</p>
+                    <div class="skill-tags">
+                        <span>Swift</span>
+                        <span>SwiftUI</span>
+                    </div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Web Development</h3>
+                    <p>Creating websites and web applications using HTML, CSS, and JavaScript</p>
+                    <div class="skill-tags">
+                        <span>HTML/CSS</span>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+            </div>
+            <div class="skills-cta">
+                <a href="skills.html" class="btn btn-secondary">View All Skills</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects Section -->
+    <section id="featured-projects" class="featured-projects">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-star"></i>
+                    <span>Featured</span>
+                </div>
+                <h2>Featured Projects</h2>
+                <p>A glimpse of my recent work</p>
+            </div>
+            <div class="featured-projects-grid">
+                <div class="featured-project">
+                    <div class="project-image">
+                        <img src="images/div/1.jpg" alt="Personal Website">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Personal Portfolio Website</h3>
+                                
+                                <div class="project-tech">
+                                    <span>HTML5</span>
+                                    <span>CSS3</span>
+                                    <span>JavaScript</span>
+                                </div>
+                                <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-project">
+                    <div class="project-image">
+                        <img src="images/div/2.jpg" alt="Task Manager">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Task Management App/Clipboard Manager</h3>
+                                
+                                <div class="project-tech">
+                                    <span>Swift</span>
+                                    <span>SwiftUI</span>
+                                </div>
+                                <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="featured-project">
+                    <div class="project-image">
+                        <img src="images/div/3.jpg" alt="Weather App">
+                        <div class="project-overlay">
+                            <div class="project-content">
+                                <h3>Weather Forecast App</h3>
+                                
+                                <div class="project-tech">
+                                    <span>React Native</span>
+                                    <span>Weather API</span>
+                                    <span>Geolocation</span>
+                                </div>
+                                <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="featured-projects-cta">
+                <a href="projects.html" class="btn btn-secondary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-envelope"></i>
+                    <span>Contact</span>
+                </div>
+                <h2>Let's Connect</h2>
+                <p>Interested in working together? Let's start a conversation!</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>joshterranova26@gmail.com</p>
+                            <p>jjt_373@usc.edu</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (818)-515-9043</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>Location</h4>
+                            <p>Burbank, Los Angeles, CA</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <a href="https://www.linkedin.com/in/joshua-terranova-90b5122ab" target="_blank" rel="noopener">linkedin.com/in/joshua-terranova-90b5122ab</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <h4>Instagram</h4>
+                            <a href="https://instagram.com/jnewland101" target="_blank" rel="noopener">@jnewland101</a>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <a href="https://github.com/thatrandomasiandev" target="_blank" rel="noopener">github.com/thatrandomasiandev</a>
+                        </div>
+                    </div>
+                </div>
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Joshua</h3>
+                    <p>Computer Science student at USC passionate about creating robust and innovative software solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="projects.html">Projects</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/joshua-terranova-90b5122ab" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/jnewland101" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://github.com/thatrandomasiandev" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Joshua Terranova. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
