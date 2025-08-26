@@ -6,10 +6,26 @@
 *.sh linguist-language=Shell
 *.md linguist-language=Markdown
 
-# Exclude certain files from language stats
+# Explicitly mark files as their correct language
+core/*.html linguist-language=HTML
+core/scripts/*.css linguist-language=CSS
+core/scripts/*.js linguist-language=JavaScript
+servers/*.py linguist-language=Python
+servers/*.sh linguist-language=Shell
+
+# Exclude ALL non-code files from language stats
 *.pdf linguist-vendored
 *.jpg linguist-vendored
 *.jpeg linguist-vendored
 *.png linguist-vendored
 *.ico linguist-vendored
 *.DS_Store linguist-vendored
+*.bcmap linguist-vendored
+*.pfb linguist-vendored
+*.ttf linguist-vendored
+*.ftl linguist-vendored
+*.json linguist-vendored
+*.mjs linguist-vendored
+*.map linguist-vendored
+*.gif linguist-vendored
+*.svg linguist-vendored
