@@ -991,11 +991,16 @@ function openResumeByDomain() {
         companyType = 'Consulting';
     }
     
+    // Google (Google format)
+    else if (domain.includes('google.com')) {
+        resumeUrl = 'google_resume.html';
+        companyType = 'Google';
+    }
+    
     // AI/ML Research Companies (NASA format for research focus)
     else if (domain.includes('openai.com') ||
              domain.includes('anthropic.com') ||
              domain.includes('deepmind.com') ||
-             domain.includes('google.com') ||
              domain.includes('apple.com') ||
              domain.includes('microsoft.com') ||
              domain.includes('lockheed.com') ||
