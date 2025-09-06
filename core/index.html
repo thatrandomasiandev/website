@@ -32,9 +32,6 @@
                     <a href="projects.html" class="nav-link">Projects & Achievements</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#resume" class="nav-link" onclick="openResumeModal(); return false;">Resume</a>
-                </li>
-                <li class="nav-item">
                     <a href="contact.html" class="nav-link">Contact</a>
                 </li>
             </ul>
@@ -97,38 +94,6 @@
         </div>
     </section>
 
-    <!-- Resume Section -->
-    <section id="resume" class="resume">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Resume</span>
-                </div>
-                                    <h2 class="section-title">My Professional Journey</h2>
-                    <p class="section-subtitle">Explore my experience in computer science, NASA internships, and technical projects</p>
-            </div>
-            <div class="resume-content">
-                <div class="resume-preview">
-                    <div class="resume-icon">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <h3>Joshua Terranova</h3>
-                    <p>Computer Science Student at USC with extensive NASA internship experience, CAD expertise, and a passion for innovative technology solutions.</p>
-                    <div class="resume-actions">
-                        <button class="btn btn-primary" onclick="openResumeModal()">
-                            <i class="fas fa-eye"></i>
-                            <span>View Resume</span>
-                        </button>
-                        <a href="#" class="btn btn-secondary" onclick="printResume()">
-                            <i class="fas fa-print"></i>
-                            <span>Print/PDF</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- About Section -->
     <section id="about" class="about">
@@ -410,77 +375,7 @@
         </div>
     </footer>
 
-    <!-- Resume Modal -->
-    <div id="resumeModal" class="resume-modal">
-        <div class="resume-modal-content">
-            <div class="resume-modal-header">
-                <h3>Select Resume Format</h3>
-                <span class="resume-modal-close" onclick="closeResumeModal()">&times;</span>
-            </div>
-            <div class="resume-modal-body">
-                <p>Please enter your work email domain to get the appropriate resume format:</p>
-                <div class="email-input-group">
-                    <input type="text" id="emailDomain" placeholder="yourname@company.com/gov" class="email-domain-input">
-                </div>
-                <p class="privacy-note">
-                    <i class="fas fa-shield-alt"></i>
-                    This email will not be recorded. It's just for sorting purposes to find the right resume.
-                </p>
-                <div class="resume-options">
-                    <button class="btn btn-primary" onclick="openResumeByDomain()">
-                        <i class="fas fa-eye"></i>
-                        View Resume
-                    </button>
-                    <button class="btn btn-secondary" onclick="openRegularResume()">
-                        <i class="fas fa-file-alt"></i>
-                        View Regular Resume
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
-    <!-- New Features Popup -->
-    <div id="featuresPopup" class="features-popup">
-        <div class="features-popup-content">
-            <div class="features-popup-header">
-                <h3>🚀 Check Out These New Features!</h3>
-                <span class="features-popup-close" onclick="closeFeaturesPopup()">&times;</span>
-            </div>
-            <div class="features-popup-body">
-                <div class="feature-item">
-                    <i class="fas fa-rocket"></i>
-                    <h4>Smart Resume Selection</h4>
-                    <p>Automatically get the right resume format based on company type!</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h4>USC-Formatted Resume</h4>
-                    <p>Professional USC-style resume perfect for university applications</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-space-shuttle"></i>
-                    <h4>NASA-Formatted Resume</h4>
-                    <p>Government/aerospace format for NASA and defense companies</p>
-                </div>
-                <div class="feature-item">
-                    <i class="fas fa-shield-alt"></i>
-                    <h4>Privacy-First</h4>
-                    <p>Your email is never recorded - just used for smart formatting</p>
-                </div>
-                <div class="features-popup-actions">
-                    <button class="btn btn-primary" onclick="goToStandardResume()">
-                        <i class="fas fa-file-alt"></i>
-                        Take Me There!
-                    </button>
-                    <button class="btn btn-secondary" onclick="closeFeaturesPopup()">
-                        <i class="fas fa-times"></i>
-                        Maybe Later
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script src="scripts/script.js"></script>
 </body>

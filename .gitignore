@@ -21,3 +21,9 @@ Thumbs.db
 # Build artifacts
 *.map
 *.mjs.map
+
+# Resume files - private use only
+core/resume.html
+core/google_resume.html
+core/nasa_resume.html
+core/resumes/
