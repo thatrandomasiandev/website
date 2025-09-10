@@ -1,0 +1,33 @@
+name: Deploy GitHub Pages from /core
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Build step goes here if you have one (npm run build, etc.)
+      # - run: npm ci && npm run build
+
+      - name: Upload Pages artifact (core folder)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./core  # <-- publish this folder
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
