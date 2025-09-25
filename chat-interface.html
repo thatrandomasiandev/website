@@ -484,7 +484,8 @@
         // Chat Interface JavaScript
         class CometAIChat {
             constructor() {
-                this.apiUrl = 'http://localhost:8080';
+                // Use relative URLs so it works both locally and in production
+                this.apiUrl = window.location.origin + '/api';
                 this.sessionId = null;
                 this.isConnected = false;
                 this.isGenerating = false;
@@ -558,7 +559,7 @@
                     }
                 } catch (error) {
                     this.updateStatus('error', 'Server not available');
-                    this.showError('Cannot connect to CometAI server. Make sure the server is running on localhost:8080');
+                    this.showError('Cannot connect to CometAI server. Please check your connection or try refreshing the page.');
                 }
             }
             
