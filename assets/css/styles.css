@@ -1147,7 +1147,7 @@ body {
 .project-image {
     position: relative;
     overflow: hidden;
-    height: 250px;
+    height: 300px;
 }
 
 .project-image img {
@@ -3194,19 +3194,8 @@ body {
     color: #4a90e2;
     line-height: 1;
     margin-bottom: 0.25rem;
-    animation: statPulse 2s ease-in-out infinite;
 }
 
-@keyframes statPulse {
-    0%, 100% { 
-        transform: scale(1);
-        text-shadow: 0 0 10px rgba(74, 144, 226, 0.3);
-    }
-    50% { 
-        transform: scale(1.05);
-        text-shadow: 0 0 20px rgba(74, 144, 226, 0.5);
-    }
-}
 
 .stat-label {
     display: block;
@@ -3761,6 +3750,190 @@ body {
     color: var(--primary-color);
 }
 
+/* AI Project Card Styling */
+.ai-project {
+    position: relative;
+    overflow: hidden;
+}
+
+.ai-project-bg {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--primary-color) 100%);
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-project-visual {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-brain-icon {
+    font-size: 80px;
+    color: var(--primary-color);
+    z-index: 2;
+    position: relative;
+    text-shadow: 0 0 30px rgba(255, 107, 53, 0.5);
+    transition: all 0.3s ease;
+}
+
+.ai-project:hover .ai-brain-icon {
+    opacity: 0.1;
+    transform: scale(0.8);
+}
+
+.ai-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: float 3s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+}
+
+.ai-project:hover .particle {
+    opacity: 0.1;
+}
+
+.particle:nth-child(1) {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+}
+
+.particle:nth-child(2) {
+    top: 30%;
+    right: 25%;
+    animation-delay: 0.5s;
+}
+
+.particle:nth-child(3) {
+    bottom: 30%;
+    left: 30%;
+    animation-delay: 1s;
+}
+
+.particle:nth-child(4) {
+    bottom: 20%;
+    right: 20%;
+    animation-delay: 1.5s;
+}
+
+.particle:nth-child(5) {
+    top: 50%;
+    left: 10%;
+    animation-delay: 2s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateY(-20px) scale(1.2);
+        opacity: 1;
+    }
+}
+
+.ai-overlay {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(255, 107, 53, 0.1) 100%);
+    backdrop-filter: blur(10px);
+}
+
+.ai-project .project-content h3 {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.ai-project .project-content p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.ai-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.ai-tech span {
+    background: rgba(255, 107, 53, 0.2);
+    color: var(--primary-color);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 107, 53, 0.3);
+}
+
+.ai-project-links {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.ai-chat-link {
+    background: var(--primary-color) !important;
+    color: white !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.ai-chat-link:hover {
+    background: var(--primary-dark) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4) !important;
+}
+
+.ai-learn-link {
+    background: transparent !important;
+    color: var(--primary-color) !important;
+    border: 1px solid var(--primary-color) !important;
+    padding: 8px 16px !important;
+    border-radius: 20px !important;
+    font-size: 0.85rem !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    transition: all 0.3s ease !important;
+    text-decoration: none !important;
+}
+
+.ai-learn-link:hover {
+    background: var(--primary-color) !important;
+    color: white !important;
+    transform: translateY(-2px) !important;
+}
+
 /* Responsive styles for interactive chat */
 @media (max-width: 768px) {
     .chat-features {
@@ -3790,6 +3963,15 @@ body {
     .chat-note {
         flex-direction: column;
         gap: 5px;
+    }
+
+    .ai-brain-icon {
+        font-size: 60px;
+    }
+
+    .ai-project-links {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }
 

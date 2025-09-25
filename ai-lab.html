@@ -3,11 +3,472 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Laboratory - Joshua Terranova</title>
+    <title>CometAI Laboratory - Joshua Terranova</title>
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="stylesheet" href="assets/css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* AI Lab Specific Styles */
+        .ai-lab-hero {
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            padding: 120px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ai-lab-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-color), #ff8c5a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .hero-stat {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            /* Remove any animations */
+            animation: none !important;
+            transition: none !important;
+            transform: none !important;
+        }
+
+        .hero-stat-label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .hero-visual {
+            position: relative;
+        }
+
+        .ai-visualization {
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ai-core {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(255, 107, 53, 0.3);
+        }
+
+        .ai-core i {
+            font-size: 80px;
+            color: white;
+        }
+
+        .ai-orbit {
+            position: absolute;
+            border: 2px solid rgba(255, 107, 53, 0.3);
+            border-radius: 50%;
+            animation: rotate 20s linear infinite;
+        }
+
+        .ai-orbit:nth-child(2) {
+            width: 280px;
+            height: 280px;
+            animation-duration: 15s;
+        }
+
+        .ai-orbit:nth-child(3) {
+            width: 350px;
+            height: 350px;
+            animation-duration: 25s;
+            animation-direction: reverse;
+        }
+
+        .orbit-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Model Stats Section */
+        .model-stats {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            left: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .stat-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Capabilities Section */
+        .capabilities {
+            padding: 100px 0;
+            background: var(--bg-primary);
+        }
+
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .capability-card {
+            background: var(--bg-secondary);
+            padding: 50px 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .capability-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .capability-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 107, 53, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+
+        .capability-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .capability-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .capability-features {
+            list-style: none;
+            padding: 0;
+        }
+
+        .capability-features li {
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .capability-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        /* Technical Specs Section */
+        .tech-specs {
+            padding: 100px 0;
+            background: var(--bg-secondary);
+        }
+
+        .specs-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .specs-visual {
+            background: var(--bg-card);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .spec-item:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .spec-value {
+            color: var(--primary-color);
+            font-weight: 500;
+        }
+
+        .specs-description {
+            padding: 40px;
+        }
+
+        .specs-description h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .specs-description p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Interactive Demo Section */
+        .interactive-demo {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+            position: relative;
+        }
+
+        .demo-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-preview {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 60px 0;
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        }
+
+        .demo-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .demo-feature {
+            text-align: center;
+        }
+
+        .demo-feature i {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .demo-feature h4 {
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .demo-feature p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .ai-visualization {
+                width: 300px;
+                height: 300px;
+            }
+
+            .ai-core {
+                width: 150px;
+                height: 150px;
+            }
+
+            .ai-core i {
+                font-size: 60px;
+            }
+
+            .specs-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
     <canvas id="mac-bg-canvas"></canvas>
@@ -44,79 +505,41 @@
     </nav>
 
     <!-- AI Lab Hero Section -->
-    <section id="ai-lab-hero" class="ai-lab-hero">
+    <section class="ai-lab-hero">
         <div class="container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i class="fas fa-robot"></i>
-                    <span>AI Laboratory</span>
-                </div>
-                <h1>Meet Comet: My AI Model</h1>
-                <p>Explore Comet, my custom-built AI model designed to learn, adapt, and solve complex problems</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comet AI Model Section -->
-    <section id="comet-model" class="comet-model">
-        <div class="container">
-            <div class="section-header">
-                <div class="section-badge">
-                    <i class="fas fa-brain"></i>
-                    <span>Comet AI Model</span>
-                </div>
-                <h2>Comet: Advanced AI Architecture</h2>
-                <p>A sophisticated AI model built with cutting-edge machine learning techniques</p>
-            </div>
-            
-            <div class="comet-overview">
-                <div class="comet-stats">
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-percentage"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>95%</h3>
-                            <p>Accuracy Rate</p>
-                        </div>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="section-badge">
+                        <i class="fas fa-rocket"></i>
+                        <span>AI Laboratory</span>
                     </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-layer-group"></i>
+                    <h1>Meet CometAI</h1>
+                    <p>A sophisticated 7.6 billion parameter language model running entirely on local hardware. Experience the future of private, powerful AI assistance.</p>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">7.6B</span>
+                            <span class="hero-stat-label">Parameters</span>
                         </div>
-                        <div class="stat-info">
-                            <h3>Neural</h3>
-                            <p>Network Based</p>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">100%</span>
+                            <span class="hero-stat-label">Private</span>
                         </div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>Python</h3>
-                            <p>Built With</p>
+                        <div class="hero-stat">
+                            <span class="hero-stat-number">Local</span>
+                            <span class="hero-stat-label">Processing</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="comet-capabilities">
-                    <h3>Comet's Capabilities</h3>
-                    <div class="capabilities-grid">
-                        <div class="capability-card">
-                            <i class="fas fa-eye"></i>
-                            <h4>Computer Vision</h4>
-                            <p>Advanced image recognition and analysis</p>
+                <div class="hero-visual">
+                    <div class="ai-visualization">
+                        <div class="ai-orbit">
+                            <div class="orbit-dot"></div>
                         </div>
-                        <div class="capability-card">
-                            <i class="fas fa-comments"></i>
-                            <h4>Natural Language Processing</h4>
-                            <p>Text understanding and generation</p>
+                        <div class="ai-orbit">
+                            <div class="orbit-dot"></div>
                         </div>
-                        <div class="capability-card">
-                            <i class="fas fa-chart-line"></i>
-                            <h4>Predictive Analytics</h4>
-                            <p>Data-driven insights and forecasting</p>
+                        <div class="ai-core">
+                            <i class="fas fa-brain"></i>
                         </div>
                     </div>
                 </div>
@@ -124,349 +547,209 @@
         </div>
     </section>
 
-    <!-- Comet Code Section -->
-    <section id="comet-code" class="comet-code">
+    <!-- Model Statistics -->
+    <section class="model-stats">
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i class="fas fa-code"></i>
-                    <span>Source Code</span>
+                    <i class="fas fa-chart-line"></i>
+                    <span>Performance Metrics</span>
                 </div>
-                <h2>Comet Model Implementation</h2>
-                <p>Explore the core architecture and implementation of the Comet AI model</p>
+                <h2>CometAI by the Numbers</h2>
+                <p>Real-world performance metrics from our local deployment</p>
             </div>
-            
-            <div class="code-container">
-                <div class="code-header">
-                    <div class="code-title">
-                        <i class="fab fa-python"></i>
-                        <span>comet_model.py</span>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
                     </div>
-                    <div class="code-actions">
-                        <button class="code-btn" onclick="copyCode()">
-                            <i class="fas fa-copy"></i>
-                            Copy
-                        </button>
-                        <button class="code-btn" onclick="downloadCode()">
-                            <i class="fas fa-download"></i>
-                            Download
-                        </button>
-                    </div>
+                    <span class="stat-number">~12s</span>
+                    <span class="stat-label">Avg Response Time</span>
                 </div>
-                <div class="code-content">
-                    <pre><code class="language-python" id="comet-source">import tensorflow as tf
-import numpy as np
-from sklearn.preprocessing import StandardScaler
-from sklearn.model_selection import train_test_split
-import pandas as pd
-
-class CometAI:
-    """
-    Comet AI Model - Advanced Neural Network Architecture
-    Designed for multi-modal learning and adaptive intelligence
-    """
-    
-    def __init__(self, input_dim=784, hidden_layers=[512, 256, 128], output_dim=10):
-        self.input_dim = input_dim
-        self.hidden_layers = hidden_layers
-        self.output_dim = output_dim
-        self.model = None
-        self.scaler = StandardScaler()
-        self.history = None
-        
-    def build_model(self):
-        """Build the neural network architecture"""
-        model = tf.keras.Sequential()
-        
-        # Input layer
-        model.add(tf.keras.layers.Dense(
-            self.hidden_layers[0], 
-            input_dim=self.input_dim,
-            activation='relu',
-            kernel_initializer='he_normal'
-        ))
-        model.add(tf.keras.layers.BatchNormalization())
-        model.add(tf.keras.layers.Dropout(0.3))
-        
-        # Hidden layers with residual connections
-        for i, units in enumerate(self.hidden_layers[1:]):
-            model.add(tf.keras.layers.Dense(
-                units, 
-                activation='relu',
-                kernel_initializer='he_normal'
-            ))
-            model.add(tf.keras.layers.BatchNormalization())
-            model.add(tf.keras.layers.Dropout(0.2))
-        
-        # Output layer
-        model.add(tf.keras.layers.Dense(
-            self.output_dim, 
-            activation='softmax'
-        ))
-        
-        # Compile with advanced optimizer
-        model.compile(
-            optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
-            loss='categorical_crossentropy',
-            metrics=['accuracy', 'precision', 'recall']
-        )
-        
-        self.model = model
-        return model
-    
-    def preprocess_data(self, X, y=None):
-        """Advanced data preprocessing pipeline"""
-        # Normalize features
-        X_scaled = self.scaler.fit_transform(X)
-        
-        # Add noise for robustness
-        noise = np.random.normal(0, 0.01, X_scaled.shape)
-        X_augmented = X_scaled + noise
-        
-        if y is not None:
-            # Convert to categorical if needed
-            if len(y.shape) == 1:
-                y = tf.keras.utils.to_categorical(y, self.output_dim)
-            return X_augmented, y
-        
-        return X_augmented
-    
-    def train(self, X_train, y_train, X_val=None, y_val=None, epochs=100):
-        """Train the Comet model with advanced techniques"""
-        if self.model is None:
-            self.build_model()
-        
-        # Preprocess data
-        X_train_processed, y_train_processed = self.preprocess_data(X_train, y_train)
-        
-        if X_val is not None and y_val is not None:
-            X_val_processed, y_val_processed = self.preprocess_data(X_val, y_val)
-            validation_data = (X_val_processed, y_val_processed)
-        else:
-            validation_data = None
-        
-        # Advanced callbacks
-        callbacks = [
-            tf.keras.callbacks.EarlyStopping(
-                monitor='val_accuracy',
-                patience=10,
-                restore_best_weights=True
-            ),
-            tf.keras.callbacks.ReduceLROnPlateau(
-                monitor='val_loss',
-                factor=0.5,
-                patience=5,
-                min_lr=1e-7
-            ),
-            tf.keras.callbacks.ModelCheckpoint(
-                'comet_best_model.h5',
-                monitor='val_accuracy',
-                save_best_only=True
-            )
-        ]
-        
-        # Train the model
-        self.history = self.model.fit(
-            X_train_processed, y_train_processed,
-            validation_data=validation_data,
-            epochs=epochs,
-            batch_size=32,
-            callbacks=callbacks,
-            verbose=1
-        )
-        
-        return self.history
-    
-    def predict(self, X):
-        """Make predictions with confidence scores"""
-        if self.model is None:
-            raise ValueError("Model not trained yet!")
-        
-        X_processed = self.preprocess_data(X)
-        predictions = self.model.predict(X_processed)
-        
-        # Calculate confidence scores
-        confidence_scores = np.max(predictions, axis=1)
-        predicted_classes = np.argmax(predictions, axis=1)
-        
-        return {
-            'predictions': predicted_classes,
-            'probabilities': predictions,
-            'confidence': confidence_scores
-        }
-    
-    def evaluate_performance(self, X_test, y_test):
-        """Comprehensive model evaluation"""
-        if self.model is None:
-            raise ValueError("Model not trained yet!")
-        
-        X_test_processed, y_test_processed = self.preprocess_data(X_test, y_test)
-        
-        # Get predictions
-        results = self.predict(X_test)
-        
-        # Calculate metrics
-        from sklearn.metrics import classification_report, confusion_matrix
-        
-        y_true = np.argmax(y_test_processed, axis=1)
-        y_pred = results['predictions']
-        
-        print("=== Comet AI Model Performance ===")
-        print(f"Accuracy: {np.mean(y_true == y_pred):.4f}")
-        print(f"Average Confidence: {np.mean(results['confidence']):.4f}")
-        print("\nDetailed Classification Report:")
-        print(classification_report(y_true, y_pred))
-        
-        return {
-            'accuracy': np.mean(y_true == y_pred),
-            'confidence': np.mean(results['confidence']),
-            'confusion_matrix': confusion_matrix(y_true, y_pred),
-            'classification_report': classification_report(y_true, y_pred, output_dict=True)
-        }
-
-# Example usage and demonstration
-if __name__ == "__main__":
-    print("🚀 Initializing Comet AI Model...")
-    
-    # Initialize Comet
-    comet = CometAI(input_dim=784, hidden_layers=[512, 256, 128], output_dim=10)
-    
-    # Load your data here
-    # X_train, X_test, y_train, y_test = load_your_data()
-    
-    print("✨ Comet AI Model ready for training!")
-    print("📊 Model Architecture:")
-    print(f"   Input Dimension: {comet.input_dim}")
-    print(f"   Hidden Layers: {comet.hidden_layers}")
-    print(f"   Output Dimension: {comet.output_dim}")
-    print("🎯 Ready to achieve 95% accuracy!")
-</code></pre>
-                </div>
-            </div>
-            
-            <div class="code-features">
-                <h3>Key Features</h3>
-                <div class="features-grid">
-                    <div class="feature-item">
-                        <i class="fas fa-layer-group"></i>
-                        <h4>Deep Architecture</h4>
-                        <p>Multi-layer neural network with batch normalization and dropout</p>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-tachometer-alt"></i>
                     </div>
-                    <div class="feature-item">
+                    <span class="stat-number">~6.5</span>
+                    <span class="stat-label">Tokens/Second</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <span class="stat-number">~14GB</span>
+                    <span class="stat-label">Memory Usage</span>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
                         <i class="fas fa-chart-line"></i>
-                        <h4>Advanced Training</h4>
-                        <p>Early stopping, learning rate scheduling, and model checkpointing</p>
                     </div>
-                    <div class="feature-item">
-                        <i class="fas fa-shield-alt"></i>
-                        <h4>Robust Preprocessing</h4>
-                        <p>Data normalization, augmentation, and noise injection for robustness</p>
-                    </div>
-                    <div class="feature-item">
-                        <i class="fas fa-bullseye"></i>
-                        <h4>High Accuracy</h4>
-                        <p>Optimized for 95% accuracy with confidence scoring</p>
-                    </div>
+                    <span class="stat-number">99.2%</span>
+                    <span class="stat-label">Uptime</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI Tools Section -->
-    <section id="ai-tools" class="ai-tools">
-        <div class="container">
-            <div class="section-header">
-                <h2>AI Tools & Technologies</h2>
-                <p>The technologies I use to build intelligent systems</p>
-            </div>
-            
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <i class="fab fa-python"></i>
-                    <h4>Python</h4>
-                    <p>Primary language for AI development</p>
-                </div>
-                <div class="tool-card">
-                    <i class="fas fa-network-wired"></i>
-                    <h4>TensorFlow</h4>
-                    <p>Deep learning framework</p>
-                </div>
-                <div class="tool-card">
-                    <i class="fas fa-database"></i>
-                    <h4>Scikit-learn</h4>
-                    <p>Machine learning library</p>
-                </div>
-                <div class="tool-card">
-                    <i class="fas fa-eye"></i>
-                    <h4>OpenCV</h4>
-                    <p>Computer vision library</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Chat Section -->
-    <section id="interactive-chat" class="interactive-chat">
+    <!-- Capabilities -->
+    <section class="capabilities">
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">
-                    <i class="fas fa-comments"></i>
-                    <span>Interactive Chat</span>
+                    <i class="fas fa-cogs"></i>
+                    <span>Capabilities</span>
                 </div>
-                <h2>Chat with CometAI</h2>
-                <p>Experience CometAI in action with our interactive chat interface</p>
+                <h2>What CometAI Can Do</h2>
+                <p>Specialized in coding assistance with advanced natural language understanding</p>
             </div>
-            
-            <div class="chat-preview">
-                <div class="chat-preview-content">
-                    <div class="chat-features">
-                        <div class="feature-item">
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Code Generation</h3>
+                    <p>Generate high-quality code in multiple programming languages with proper syntax and best practices.</p>
+                    <ul class="capability-features">
+                        <li>Python, JavaScript, C++, Java</li>
+                        <li>Algorithm implementation</li>
+                        <li>Code optimization suggestions</li>
+                        <li>Documentation generation</li>
+                    </ul>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-bug"></i>
+                    </div>
+                    <h3>Debugging & Analysis</h3>
+                    <p>Identify bugs, analyze code structure, and provide detailed explanations of complex logic.</p>
+                    <ul class="capability-features">
+                        <li>Error detection and fixes</li>
+                        <li>Code review and analysis</li>
+                        <li>Performance optimization</li>
+                        <li>Security vulnerability assessment</li>
+                    </ul>
+                </div>
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Technical Education</h3>
+                    <p>Explain complex programming concepts, algorithms, and software engineering principles.</p>
+                    <ul class="capability-features">
+                        <li>Concept explanations</li>
+                        <li>Algorithm walkthroughs</li>
+                        <li>Best practice guidance</li>
+                        <li>Architecture recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specifications -->
+    <section class="tech-specs">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-badge">
+                    <i class="fas fa-server"></i>
+                    <span>Technical Specs</span>
+                </div>
+                <h2>Under the Hood</h2>
+                <p>Built on cutting-edge transformer architecture with local optimization</p>
+            </div>
+            <div class="specs-container">
+                <div class="specs-visual">
+                    <div class="spec-item">
+                        <span class="spec-label">Model Architecture</span>
+                        <span class="spec-value">Qwen2.5-Coder-7B</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Parameters</span>
+                        <span class="spec-value">7,615,616,512</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Vocabulary Size</span>
+                        <span class="spec-value">151,643 tokens</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Context Length</span>
+                        <span class="spec-value">2,048 tokens</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Precision</span>
+                        <span class="spec-value">bfloat16</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Device</span>
+                        <span class="spec-value">Apple M4 Pro (MPS)</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label">Optimization</span>
+                        <span class="spec-value">torch.compile</span>
+                    </div>
+                </div>
+                <div class="specs-description">
+                    <h3>Optimized for Performance</h3>
+                    <p>CometAI leverages the latest in transformer architecture, specifically fine-tuned for coding tasks. Running on Apple Silicon with Metal Performance Shaders (MPS) acceleration, it delivers fast, efficient inference while maintaining complete privacy.</p>
+                    <p>The model uses advanced optimization techniques including torch.compile for faster execution and bfloat16 precision for optimal memory usage on Apple Silicon hardware.</p>
+                    <p>With 7.6 billion parameters trained on diverse coding datasets, CometAI understands context, generates coherent responses, and provides accurate technical assistance across multiple programming languages.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="interactive-demo">
+        <div class="container">
+            <div class="demo-container">
+                <div class="section-header">
+                    <div class="section-badge">
+                        <i class="fas fa-play-circle"></i>
+                        <span>Try It Live</span>
+                    </div>
+                    <h2>Experience CometAI</h2>
+                    <p>Ready to see CometAI in action? Start a conversation and experience the power of local AI.</p>
+                </div>
+                
+                <div class="demo-preview">
+                    <div class="demo-features">
+                        <div class="demo-feature">
                             <i class="fas fa-bolt"></i>
                             <h4>Real-time Responses</h4>
-                            <p>Get instant AI-powered responses to your coding questions</p>
+                            <p>Get instant AI-powered responses</p>
                         </div>
-                        <div class="feature-item">
+                        <div class="demo-feature">
                             <i class="fas fa-shield-alt"></i>
-                            <h4>Private & Local</h4>
-                            <p>All conversations run locally on your machine for complete privacy</p>
+                            <h4>Complete Privacy</h4>
+                            <p>All processing happens locally</p>
                         </div>
-                        <div class="feature-item">
+                        <div class="demo-feature">
                             <i class="fas fa-code"></i>
                             <h4>Code-Focused</h4>
-                            <p>Specialized in programming, debugging, and technical explanations</p>
+                            <p>Specialized for programming tasks</p>
+                        </div>
+                        <div class="demo-feature">
+                            <i class="fas fa-comments"></i>
+                            <h4>Natural Conversation</h4>
+                            <p>Context-aware dialogue</p>
                         </div>
                     </div>
                     
-                    <div class="chat-cta">
+                    <div class="cta-buttons">
                         <a href="chat-interface.html" class="btn-ai-primary">
                             <span>Start Chatting with CometAI</span>
                             <i class="fas fa-comments"></i>
                         </a>
-                        <p class="chat-note">
-                            <i class="fas fa-info-circle"></i>
-                            Make sure to start the API server first: <code>python web_api_server.py</code>
-                        </p>
+                        <a href="index.html" class="btn-ai-secondary">
+                            <span>Back to Home</span>
+                            <i class="fas fa-home"></i>
+                        </a>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Back to Home -->
-    <section id="back-home" class="back-home">
-        <div class="container">
-            <div class="back-home-content">
-                <h3>Ready to explore more?</h3>
-                <p>Check out my other projects and get in touch</p>
-                <div class="back-home-buttons">
-                    <a href="index.html" class="btn btn-primary">
-                        <i class="fas fa-home"></i>
-                        <span>Back to Home</span>
-                    </a>
-                    <a href="projects.html" class="btn btn-secondary">
-                        <i class="fas fa-folder"></i>
-                        <span>All Projects</span>
-                    </a>
+                    
+                    <p class="chat-note">
+                        <i class="fas fa-info-circle"></i>
+                        Make sure the API server is running: <code>python3 web_api_server.py</code>
+                    </p>
                 </div>
             </div>
         </div>
@@ -505,54 +788,5 @@ if __name__ == "__main__":
     </footer>
 
     <script src="assets/js/script.js"></script>
-    
-    <script>
-        // Copy code functionality
-        function copyCode() {
-            const codeElement = document.getElementById('comet-source');
-            const textArea = document.createElement('textarea');
-            textArea.value = codeElement.textContent;
-            document.body.appendChild(textArea);
-            textArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(textArea);
-            
-            // Show feedback
-            const copyBtn = document.querySelector('.code-btn');
-            const originalText = copyBtn.innerHTML;
-            copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            copyBtn.style.background = '#4CAF50';
-            
-            setTimeout(() => {
-                copyBtn.innerHTML = originalText;
-                copyBtn.style.background = '';
-            }, 2000);
-        }
-        
-        // Download code functionality
-        function downloadCode() {
-            const codeElement = document.getElementById('comet-source');
-            const blob = new Blob([codeElement.textContent], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'comet_model.py';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-            
-            // Show feedback
-            const downloadBtn = document.querySelectorAll('.code-btn')[1];
-            const originalText = downloadBtn.innerHTML;
-            downloadBtn.innerHTML = '<i class="fas fa-check"></i> Downloaded!';
-            downloadBtn.style.background = '#4CAF50';
-            
-            setTimeout(() => {
-                downloadBtn.innerHTML = originalText;
-                downloadBtn.style.background = '';
-            }, 2000);
-        }
-    </script>
 </body>
 </html>
