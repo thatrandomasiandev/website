@@ -1,0 +1,30 @@
+# LocalLLM Requirements
+
+# Core ML libraries
+torch>=2.0.0
+transformers>=4.30.0
+tokenizers>=0.13.0
+accelerate>=0.20.0
+
+# Quantization support
+bitsandbytes>=0.39.0
+
+# Configuration and utilities
+pyyaml>=6.0
+numpy>=1.21.0
+tqdm>=4.64.0
+requests>=2.28.0
+
+# GUI dependencies
+tkinter  # Usually comes with Python
+Pillow>=9.0.0  # For image handling in GUI
+
+# Optional: Web interface
+gradio>=3.35.0
+fastapi>=0.68.0
+uvicorn>=0.15.0
+
+# Development dependencies (optional)
+pytest>=7.0.0
+black>=22.0.0
+flake8>=4.0.0
