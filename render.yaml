@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: cometai-website
+    env: docker
+    plan: pro
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: MODEL_NAME
+        value: "qwen2.5-coder-7b-instruct"
+    healthCheckPath: /api/health
+    autoDeploy: true

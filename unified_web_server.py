@@ -401,7 +401,7 @@ def main():
     
     parser = argparse.ArgumentParser(description="CometAI Unified Web Server")
     parser.add_argument("--host", default="localhost", help="Host to bind to")
-    parser.add_argument("--port", type=int, default=8080, help="Port to bind to")
+    parser.add_argument("--port", type=int, default=int(os.environ.get('PORT', 8080)), help="Port to bind to")
     parser.add_argument("--model", default="qwen2.5-coder-7b-instruct", help="Model to use")
     parser.add_argument("--config", help="Path to config file")
     parser.add_argument("--debug", action="store_true", help="Enable debug mode")
