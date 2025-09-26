@@ -1,0 +1,86 @@
+# LocalLLM Configuration File
+
+# Model settings
+model:
+  # Choose your model: qwen2.5-coder-7b-instruct or starcoder2-7b
+  name: "qwen2.5-coder-7b-instruct"
+  
+  # Optional: specify local model path (if not using downloaded models)
+  path: null
+  
+  # Generation settings - Optimized for speed
+  max_tokens: 512      # Reduced for faster responses
+  temperature: 0.3     # Lower for more focused, faster generation
+  top_p: 0.8          # Slightly lower for speed
+  top_k: 20           # Much lower for faster sampling
+  do_sample: true
+  repetition_penalty: 1.05  # Lower to reduce computation
+
+# Performance settings - Optimized for M4 Pro with 24GB RAM
+performance:
+  # GPU usage: auto, true, false (M4 Pro has integrated GPU)
+  use_gpu: "auto"
+  
+  # Device mapping for multi-GPU: auto, cpu, or specific mapping
+  device_map: "auto"
+  
+  # Memory optimization (requires bitsandbytes) - ENABLED for M4 Pro
+  load_in_8bit: true   # Use 8-bit instead of 4-bit for better stability
+  load_in_4bit: false  # Disable 4-bit to avoid decoding issues
+  
+  # PyTorch data type: auto, float16, bfloat16, float32 - Use bfloat16 for M4 Pro
+  torch_dtype: "bfloat16"  # Best for Apple Silicon
+  
+  # Memory settings - Optimized for 24GB system
+  low_cpu_mem_usage: true
+  max_memory: {"cpu": "20GB"}  # Reserve 4GB for system
+
+# Chat settings
+chat:
+  # System prompt for the AI
+  system_prompt: "You are a helpful AI coding assistant. Provide clear, accurate, and helpful responses."
+  
+  # Chat template: auto (use model's template) or custom
+  chat_template: "auto"
+  
+  # Conversation history
+  save_history: true
+  history_file: "chat_history.json"
+  max_history_length: 50
+
+# Interface settings
+interface:
+  # Theme: dark, light
+  theme: "dark"
+  
+  # Show model info on startup
+  show_model_info: true
+  
+  # Enable verbose logging
+  verbose: false
+
+# API server settings (for api_server.py)
+api:
+  host: "localhost"
+  port: 8080
+  enable_cors: true
+  max_concurrent_requests: 4
+
+# Advanced settings - M4 Pro Optimizations
+advanced:
+  # Trust remote code (required for some models)
+  trust_remote_code: true
+  
+  # Enable torch.compile optimization (PyTorch 2.0+) - ENABLED for M4 Pro
+  enable_torch_compile: true  # Significant speedup on Apple Silicon
+  
+  # Apple Silicon specific optimizations
+  use_mps: true  # Use Metal Performance Shaders
+  threads: 14    # Match your 14 cores
+  
+  # Custom model configurations
+  custom_models: {}
+    # example:
+    # my-custom-model:
+    #   hf_name: "path/to/model"
+    #   description: "My custom model"
