@@ -544,41 +544,6 @@ console.log('Enhanced website loaded successfully! 🚀');
     type();
 })(); 
 
-// === PDF Dropdown and Direct Link Logic (No Embedded Viewer) ===
-document.addEventListener('DOMContentLoaded', () => {
-    const pdfs = [
-        { name: 'Discrete Math Course Project (Tower of Hanoi)', file: 'Discrete_Math_Course_Project_Tower_of_Hanoi_V2.pdf' },
-        { name: 'Radiation', file: 'Radiation.pdf' },
-        { name: 'Cold Welding', file: 'Cold_Welding.pdf' }
-    ];
-    const menu = document.getElementById('pdf-menu');
-    const viewerLink = document.getElementById('pdfjs-viewer-link');
-    const viewer = document.getElementById('pdfjs-viewer');
-    if (!menu || !viewerLink || !viewer) return;
-    // Populate dropdown
-    menu.innerHTML = '<option value="">Select a PDF...</option>' +
-        pdfs.map(pdf => `<option value="${pdf.file}">${pdf.name}</option>`).join('');
-    // On change, update direct link
-    menu.addEventListener('change', function() {
-        const file = this.value;
-        if (file) {
-            viewerLink.href = `pdfs/${encodeURIComponent(file)}`;
-            viewerLink.style.display = 'block';
-            viewerLink.textContent = 'Open PDF';
-            viewerLink.removeAttribute('target');
-            viewerLink.removeAttribute('rel');
-            viewer.innerHTML = '';
-        } else {
-            viewerLink.href = '#';
-            viewerLink.style.display = 'none';
-            viewer.innerHTML = '';
-        }
-    });
-    // Hide link if no PDF selected
-    viewerLink.style.display = 'none';
-    // Hide embedded viewer area
-    viewer.style.display = 'none';
-}); 
 
 // Counter animation for hero stats
 function animateCounter(element, target, duration = 2000) {
