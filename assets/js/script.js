@@ -890,6 +890,7 @@ window.aiPredict = async function(prompt, options = {}) {
     // Determine API URL based on environment
     const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const isLocalNetwork = window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.') || window.location.hostname.startsWith('172.');
+    const devTunnelUrl = 'https://cl3n0kqx-8080.usw3.devtunnels.ms';
     
     let apiUrl;
     if (isLocalhost) {
@@ -897,7 +898,7 @@ window.aiPredict = async function(prompt, options = {}) {
     } else if (isLocalNetwork) {
         apiUrl = `http://${window.location.hostname}:8080/api/v1/predict`;
     } else {
-        apiUrl = '/api/v1/predict'; // Use relative URL in production
+        apiUrl = devTunnelUrl + '/api/v1/predict'; // Use public Dev Tunnel in production
     }
     
     const body = {

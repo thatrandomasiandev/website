@@ -488,6 +488,9 @@
                 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                 const isLocalNetwork = window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.') || window.location.hostname.startsWith('172.');
                 
+                // Public Dev Tunnel URL for global AI access
+                const devTunnelUrl = 'https://cl3n0kqx-8080.usw3.devtunnels.ms';
+                
                 if (isLocalhost) {
                     // Local access - use unified server on port 8080
                     this.apiUrl = 'http://localhost:8080/api';
@@ -495,8 +498,8 @@
                     // Network access - use current host with port 8080
                     this.apiUrl = `http://${window.location.hostname}:8080/api`;
                 } else {
-                    // Production/cloud - use relative URLs (for when deployed together)
-                    this.apiUrl = window.location.origin + '/api';
+                    // Production/cloud - use public Dev Tunnel for AI functionality
+                    this.apiUrl = devTunnelUrl + '/api';
                 }
                 
                 this.sessionId = null;
