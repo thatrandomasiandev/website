@@ -121,6 +121,7 @@ class UnifiedCometAIServer:
                     '/api/health': 'Health check',
                     '/api/model/info': 'Model information',
                     '/api/model/status': 'Model loading status',
+                    '/api/v1/predict': 'Text generation prediction (POST)',
                     '/api/chat': 'Chat with AI (POST)',
                     '/api/chat/new': 'Start new conversation (POST)',
                     '/api/chat/history/<session_id>': 'Get conversation history',
@@ -182,6 +183,49 @@ class UnifiedCometAIServer:
                 'model_name': self.model_name,
                 'timestamp': datetime.now().isoformat()
             })
+        
+        @self.app.route('/api/v1/predict', methods=['POST'])
+        def api_v1_predict():
+            """Single-shot text generation prediction"""
+            if not LOCALLLM_AVAILABLE:
+                return jsonify({
+                    'error': 'AI functionality not available',
+                    'reason': 'LocalLLM module not found'
+                }), 503
+            
+            if not self.model_loaded:
+                return jsonify({
+                    'error': 'Model not loaded',
+                    'model_loading': self.model_loading,
+                    'model_error': self.model_error
+                }), 503
+            
+            data = request.get_json(silent=True) or {}
+            prompt = (data.get('prompt') or '').strip()
+            if not prompt:
+                return jsonify({'error': 'Missing field: prompt'}), 400
+            
+            max_tokens = data.get('max_tokens', 256)
+            temperature = data.get('temperature', 0.7)
+            top_p = data.get('top_p', 0.9)
+            top_k = data.get('top_k', 50)
+            
+            try:
+                output = self.llm.generate(
+                    prompt,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    top_p=top_p,
+                    top_k=top_k
+                )
+                return jsonify({
+                    'success': True,
+                    'prediction': output,
+                    'timestamp': datetime.now().isoformat()
+                })
+            except Exception as e:
+                logger.error(f"Predict error: {e}")
+                return jsonify({'error': str(e)}), 500
         
         @self.app.route('/api/chat', methods=['POST'])
         def chat():
@@ -322,7 +366,7 @@ class UnifiedCometAIServer:
                     'error': 'API endpoint not found',
                     'message': 'The requested API endpoint does not exist',
                     'available_endpoints': [
-                        '/api', '/api/health', '/api/model/info', '/api/model/status',
+                        '/api', '/api/health', '/api/model/info', '/api/model/status', '/api/v1/predict',
                         '/api/chat', '/api/chat/new', '/api/chat/history/<session_id>',
                         '/api/chat/clear/<session_id>', '/api/chat/sessions'
                     ]

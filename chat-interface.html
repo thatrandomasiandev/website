@@ -484,19 +484,22 @@
         // Chat Interface JavaScript
         class CometAIChat {
             constructor() {
-                // Check if we're accessing from another device
+                // Automatically detect the correct API URL based on where the site is accessed
                 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                 const isLocalNetwork = window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.') || window.location.hostname.startsWith('172.');
                 
+                // Dev Tunnel URL for global AI access
+                const devTunnelUrl = 'https://cl3n0kqx-8080.usw3.devtunnels.ms';
+                
                 if (isLocalhost) {
-                    // Local access - use unified server on port 8081
-                    this.apiUrl = 'http://localhost:8081/api';
-                } else if (isLocalNetwork || window.location.hostname === '192.168.0.157') {
-                    // Network access - use laptop's IP
-                    this.apiUrl = 'http://192.168.0.157:8081/api';
+                    // Local access - use unified server on port 8080
+                    this.apiUrl = 'http://localhost:8080/api';
+                } else if (isLocalNetwork) {
+                    // Network access - use current host with port 8080
+                    this.apiUrl = `http://${window.location.hostname}:8080/api`;
                 } else {
-                    // Production/cloud - use relative URLs
-                    this.apiUrl = window.location.origin + '/api';
+                    // Production/cloud - use Dev Tunnel for AI functionality
+                    this.apiUrl = devTunnelUrl + '/api';
                 }
                 
                 this.sessionId = null;

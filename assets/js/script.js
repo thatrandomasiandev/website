@@ -58,27 +58,82 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // });
 
 // Portfolio Filtering
-const filterButtons = document.querySelectorAll('.filter-btn');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+// Project & achievements filtering
+document.addEventListener('DOMContentLoaded', () => {
+    const projectItems = document.querySelectorAll('.featured-projects-grid .featured-project');
+    const achievementItems = document.querySelectorAll('.achievements-grid .achievement-card');
+    const projectList = document.querySelector('.projects-list');
 
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Add active class to clicked button
-        button.classList.add('active');
-        
-        const filter = button.getAttribute('data-filter');
-        
-        portfolioItems.forEach(item => {
-            if (filter === 'all' || item.getAttribute('data-category') === filter) {
-                item.style.display = 'block';
-                item.style.animation = 'fadeIn 0.5s ease';
+    function wireDropdownFiltering(dropdown, items) {
+        if (!dropdown) return;
+        const toggle = dropdown.querySelector('.dropdown-toggle');
+        const menu = dropdown.querySelector('.dropdown-menu');
+        if (!toggle || !menu) return;
+
+        // Open/close behavior (reuse existing dropdown logic via classes)
+        toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!isExpanded));
+            menu.classList.toggle('show');
+        });
+
+        menu.querySelectorAll('.dropdown-item').forEach(itemEl => {
+            itemEl.addEventListener('click', (e) => {
+                e.preventDefault();
+                const filter = itemEl.getAttribute('data-filter');
+                // Update label
+                const label = itemEl.textContent.trim();
+                toggle.innerHTML = `Category: ${label} <i class="fas fa-chevron-down"></i>`;
+                // Close menu
+                toggle.setAttribute('aria-expanded', 'false');
+                menu.classList.remove('show');
+                // Apply filter
+                items.forEach(card => {
+                    const cat = card.getAttribute('data-category') || '';
+                    const show = filter === 'all' || cat.split(' ').includes(filter);
+                    card.style.display = show ? 'block' : 'none';
+                    if (show) card.style.animation = 'fadeIn 0.5s ease';
+                });
+            });
+        });
+    }
+
+    // Category list behavior for projects page (minimize tiles)
+    if (projectList) {
+        // Ensure all cards are visible within their containers; containers handle animation
+        projectItems.forEach(card => { card.style.display = 'block'; });
+
+        // Start collapsed
+        document.querySelectorAll('.category-content').forEach(section => {
+            section.classList.remove('open');
+        });
+
+        projectList.addEventListener('click', (e) => {
+            const btn = e.target.closest('.category-row');
+            if (!btn) return;
+            const targetId = btn.getAttribute('data-target');
+            const section = document.getElementById(targetId);
+            if (!section) return;
+
+            const expanded = btn.getAttribute('aria-expanded') === 'true';
+            // Collapse others
+            projectList.querySelectorAll('.category-row').forEach(b => b.setAttribute('aria-expanded', 'false'));
+            document.querySelectorAll('.category-content').forEach(s => s.classList.remove('open'));
+
+            // Toggle this one
+            if (!expanded) {
+                btn.setAttribute('aria-expanded', 'true');
+                section.classList.add('open');
             } else {
-                item.style.display = 'none';
+                btn.setAttribute('aria-expanded', 'false');
+                section.classList.remove('open');
             }
         });
-    });
+    }
+
+    // No achievements dropdown; show all by default
+    achievementItems.forEach(card => { card.style.display = 'block'; });
 });
 
 // Testimonials Slider
@@ -828,4 +883,240 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+// === AI Predict helper ===
+// Exposes window.aiPredict(prompt, options) that calls the site's unified API
+window.aiPredict = async function(prompt, options = {}) {
+    // Determine API URL based on environment
+    const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const isLocalNetwork = window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.') || window.location.hostname.startsWith('172.');
+    const devTunnelUrl = 'https://cl3n0kqx-8080.usw3.devtunnels.ms';
+    
+    let apiUrl;
+    if (isLocalhost) {
+        apiUrl = 'http://localhost:8080/api/v1/predict';
+    } else if (isLocalNetwork) {
+        apiUrl = `http://${window.location.hostname}:8080/api/v1/predict`;
+    } else {
+        apiUrl = devTunnelUrl + '/api/v1/predict';
+    }
+    
+    const body = {
+        prompt: String(prompt || ''),
+        max_tokens: options.max_tokens ?? 256,
+        temperature: options.temperature ?? 0.7,
+        top_p: options.top_p ?? 0.9,
+        top_k: options.top_k ?? 50
+    };
+    const res = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+        const errText = await res.text().catch(() => '');
+        throw new Error(`Prediction failed (${res.status}): ${errText}`);
+    }
+    const data = await res.json();
+    return data.prediction ?? data.response;
+};
+
+// Resume modal functions
+window.openResumeModal = function() {
+    const modal = document.getElementById('resumeModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+};
+
+window.closeResumeModal = function() {
+    const modal = document.getElementById('resumeModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // Restore scrolling
+    }
+};
+
+// Close modal when clicking outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('resumeModal');
+    if (event.target === modal) {
+        closeResumeModal();
+    }
+};
+
+// Resume download function
+window.downloadResume = function() {
+    // For now, redirect to the PDF viewer page
+    // In the future, this could trigger an actual PDF download
+    window.open('pdfs/index.html', '_blank');
+};
+
+// PDF Download function using html2pdf
+window.downloadResumePDF = async function(htmlFile, filename) {
+    try {
+        // Show loading state
+        const button = event.target.closest('button');
+        const originalText = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span>Converting...</span>';
+        button.disabled = true;
+
+        console.log('Starting PDF conversion for:', htmlFile);
+
+        // Load the HTML file
+        const response = await fetch(htmlFile);
+        if (!response.ok) {
+            throw new Error(`Failed to load HTML file: ${response.status} ${response.statusText}`);
+        }
+        const htmlContent = await response.text();
+        
+        // Create a temporary container
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = htmlContent;
+        tempDiv.style.position = 'absolute';
+        tempDiv.style.left = '-9999px';
+        tempDiv.style.top = '-9999px';
+        tempDiv.style.visibility = 'hidden';
+        tempDiv.style.width = '8.5in';
+        tempDiv.style.height = 'auto';
+        document.body.appendChild(tempDiv);
+
+        // Wait a moment for styles to load
+        await new Promise(resolve => setTimeout(resolve, 200));
+
+        // Get the resume content
+        const resumeContent = tempDiv.querySelector('.resume-page');
+        
+        if (!resumeContent) {
+            console.error('Resume content not found. Available elements:', tempDiv.querySelectorAll('*'));
+            throw new Error('Resume content not found - .resume-page element missing');
+        }
+
+        console.log('Found resume content, starting PDF conversion...');
+
+        // Configure html2pdf options for better formatting
+        const opt = {
+            margin: [0.5, 0.5, 0.5, 0.5],
+            filename: filename,
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 2,
+                useCORS: true,
+                letterRendering: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                logging: false,
+                width: 816, // 8.5 inches at 96 DPI
+                height: resumeContent.scrollHeight * 2,
+                scrollX: 0,
+                scrollY: 0
+            },
+            jsPDF: { 
+                unit: 'in', 
+                format: 'letter', 
+                orientation: 'portrait',
+                compress: true
+            },
+            pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+        };
+
+        // Load html2pdf library if not already loaded
+        if (typeof html2pdf === 'undefined') {
+            await new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        // Convert to PDF and download
+        await html2pdf().set(opt).from(resumeContent).save();
+
+        console.log('PDF conversion completed successfully');
+
+        // Clean up
+        document.body.removeChild(tempDiv);
+
+        // Reset button
+        button.innerHTML = originalText;
+        button.disabled = false;
+
+    } catch (error) {
+        console.error('Error generating PDF:', error);
+        alert(`Error generating PDF: ${error.message}. Please try again or use the View option instead.`);
+        
+        // Reset button
+        const button = event.target.closest('button');
+        button.innerHTML = '<i class="fas fa-download"></i><span>PDF</span>';
+        button.disabled = false;
+    }
+};
+
+// Company Tabs Functionality
+function initializeCompanyTabs() {
+    const companyTabs = document.querySelectorAll('.company-tab');
+    const companyContents = document.querySelectorAll('.company-content');
+
+    companyTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const company = tab.getAttribute('data-company');
+            
+            // Remove active class from all tabs and contents
+            companyTabs.forEach(t => t.classList.remove('active'));
+            companyContents.forEach(c => {
+                c.classList.remove('active');
+                // Reset animation state
+                const companyCard = c.querySelector('.company-card');
+                const resumeCards = c.querySelectorAll('.specialization-card');
+                const littleMan = c.querySelector('.little-man');
+                
+                if (companyCard) {
+                    companyCard.style.animation = 'none';
+                    companyCard.offsetHeight; // Trigger reflow
+                }
+                resumeCards.forEach(card => {
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                });
+                if (littleMan) {
+                    littleMan.style.animation = 'none';
+                    littleMan.offsetHeight; // Trigger reflow
+                }
+            });
+            
+            // Add active class to clicked tab and corresponding content
+            tab.classList.add('active');
+            const targetContent = document.getElementById(`${company}-content`);
+            if (targetContent) {
+                targetContent.classList.add('active');
+                
+                // Trigger company card animation
+                const companyCard = targetContent.querySelector('.company-card');
+                if (companyCard) {
+                    companyCard.style.animation = 'companyCardSlideOut 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    // Ensure the card stays visible after animation
+                    setTimeout(() => {
+                        companyCard.style.opacity = '1';
+                        companyCard.style.transform = 'translateX(0) scale(1) rotateY(0deg)';
+                    }, 800);
+                }
+                
+                // Trigger resume cards animation after company card
+                const resumeCards = targetContent.querySelectorAll('.specialization-card');
+                resumeCards.forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.animation = `resumeCardSlideOut 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards`;
+                    }, 1000 + (index * 150)); // 1s delay + 0.15s per card
+                });
+            }
+        });
+    });
+
+}
+
+// Initialize company tabs when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeCompanyTabs);
 
