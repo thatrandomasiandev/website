@@ -727,11 +727,12 @@
                 // Disable send button
                 this.isGenerating = true;
                 this.sendBtn.disabled = true;
-                this.updateStatus('loading', 'Generating response...');
+                this.updateStatus('loading', 'AI is thinking...');
+                this.startProgressIndicator();
                 
                 try {
                     const controller = new AbortController();
-                    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout for chat
+                    const timeoutId = setTimeout(() => controller.abort(), 180000); // 3 minute timeout for chat
                     
                     const response = await fetch(`${this.apiUrl}/chat`, {
                         method: 'POST',
@@ -741,7 +742,7 @@
                         body: JSON.stringify({
                             message: message,
                             session_id: this.sessionId,
-                            max_tokens: 512,
+                            max_tokens: 256,  // Reduced for faster responses
                             temperature: 0.7
                         }),
                         signal: controller.signal
@@ -752,8 +753,9 @@
                     const data = await response.json();
                     
                     if (data.success) {
-                        // Hide typing indicator
+                        // Hide typing indicator and stop progress
                         this.hideTypingIndicator();
+                        this.stopProgressIndicator();
                         
                         // Add AI response to chat
                         this.addMessage('assistant', data.response);
@@ -761,14 +763,16 @@
                         this.updateStatus('ready', 'Ready to chat');
                     } else {
                         this.hideTypingIndicator();
+                        this.stopProgressIndicator();
                         this.showError(`Error: ${data.error}`);
                         this.updateStatus('error', 'Error occurred');
                     }
                 } catch (error) {
                     this.hideTypingIndicator();
+                    this.stopProgressIndicator();
                     
                     if (error.name === 'AbortError') {
-                        this.showError('Request timed out. Please try again.');
+                        this.showError('AI is taking too long. Try asking a simpler question or try again.');
                         this.updateStatus('error', 'Request timeout');
                     } else if (error.message.includes('Failed to fetch')) {
                         this.isConnected = false;
@@ -838,6 +842,20 @@
                 setTimeout(() => {
                     this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
                 }, 100);
+            }
+            
+            startProgressIndicator() {
+                this.progressInterval = setInterval(() => {
+                    const dots = Math.floor(Date.now() / 500) % 4;
+                    this.updateStatus('loading', `AI is thinking${'.'.repeat(dots)}`);
+                }, 500);
+            }
+            
+            stopProgressIndicator() {
+                if (this.progressInterval) {
+                    clearInterval(this.progressInterval);
+                    this.progressInterval = null;
+                }
             }
             
             showError(message) {

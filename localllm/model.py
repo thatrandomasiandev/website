@@ -54,11 +54,11 @@ class LocalLLMConfig:
             }
         }
         
-        # Generation settings
-        self.max_tokens = kwargs.get('max_tokens', 2048)
+        # Generation settings - optimized for speed
+        self.max_tokens = kwargs.get('max_tokens', 512)  # Reduced for faster responses
         self.temperature = kwargs.get('temperature', 0.7)
         self.top_p = kwargs.get('top_p', 0.9)
-        self.top_k = kwargs.get('top_k', 50)
+        self.top_k = kwargs.get('top_k', 40)  # Reduced for speed
         self.do_sample = kwargs.get('do_sample', True)
         self.repetition_penalty = kwargs.get('repetition_penalty', 1.1)
         
@@ -371,6 +371,11 @@ class LocalLLM:
             use_cache=True,
             early_stopping=True,
             num_beams=1,  # Greedy decoding for speed
+            # Additional speed optimizations
+            max_time=120,  # 2 minute max generation time
+            min_length=10,  # Minimum response length
+            skip_special_tokens=True,
+            clean_up_tokenization_spaces=True,
         )
     
     def _get_torch_dtype(self):
