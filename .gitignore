@@ -1,4 +1,40 @@
-# System files
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
 .DS_Store
 .DS_Store?
 ._*
@@ -7,23 +43,25 @@
 ehthumbs.db
 Thumbs.db
 
-# IDE files
-.vscode/
-*.swp
-*.swo
-*~
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Model cache (HuggingFace)
+.cache/
+models/
+
+# Logs
+*.log
+logs/
 
 # Temporary files
 *.tmp
 *.temp
-*.log
 
-# Build artifacts
-*.map
-*.mjs.map
+# Windows
+Icon*
 
-# Resume files - private use only
-core/resume.html
-core/google_resume.html
-core/nasa_resume.html
-core/resumes/
+# Tunnel config (may contain sensitive URLs)
+tunnel_config.json
