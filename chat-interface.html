@@ -578,7 +578,19 @@
                 try {
                     this.updateStatus('loading', 'Connecting to CometAI...');
                     
-                    const response = await fetch(`${this.apiUrl}/health`);
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+                    
+                    const response = await fetch(`${this.apiUrl}/health`, {
+                        signal: controller.signal,
+                        cache: 'no-cache',
+                        headers: {
+                            'Cache-Control': 'no-cache',
+                            'Pragma': 'no-cache'
+                        }
+                    });
+                    
+                    clearTimeout(timeoutId);
                     const data = await response.json();
                     
                     if (data.model_loaded) {
@@ -588,8 +600,8 @@
                         console.log('✅ CometAI server connected successfully');
                     } else if (data.model_loading) {
                         this.updateStatus('loading', 'Model loading...');
-                        // Check again in 2 seconds
-                        setTimeout(() => this.establishConnection(), 2000);
+                        // Check again in 3 seconds (less aggressive)
+                        setTimeout(() => this.establishConnection(), 3000);
                     } else if (data.model_error) {
                         this.updateStatus('error', `Model Error: ${data.model_error}`);
                         this.isConnected = false;
@@ -603,7 +615,9 @@
                     if (this.reconnectAttempts < this.maxReconnectAttempts) {
                         this.reconnectAttempts++;
                         this.updateStatus('loading', `Reconnecting... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
-                        setTimeout(() => this.establishConnection(), this.reconnectInterval);
+                        // Exponential backoff: 3s, 6s, 12s, 24s, 48s
+                        const delay = this.reconnectInterval * Math.pow(2, this.reconnectAttempts - 1);
+                        setTimeout(() => this.establishConnection(), delay);
                     } else {
                         this.showError('Cannot connect to CometAI server. Please check your connection or try refreshing the page.');
                     }
@@ -611,34 +625,45 @@
             }
             
             startConnectionMonitoring() {
-                // Periodic health checks every 30 seconds
+                // Reduced health checks every 2 minutes to avoid SSL conflicts
                 this.healthCheckInterval = setInterval(async () => {
-                    if (!this.isGenerating) { // Don't check during generation
+                    if (!this.isGenerating && this.isConnected) { // Only check if we think we're connected
                         try {
-                            const response = await fetch(`${this.apiUrl}/health`);
-                            const data = await response.json();
+                            const controller = new AbortController();
+                            const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout
                             
-                            if (data.model_loaded && !this.isConnected) {
-                                // Reconnected!
-                                this.isConnected = true;
-                                this.reconnectAttempts = 0;
-                                this.updateStatus('ready', 'Connected & Ready');
-                                console.log('✅ Reconnected to CometAI server');
-                            } else if (!data.model_loaded && this.isConnected) {
-                                // Lost connection
-                                this.isConnected = false;
-                                this.updateStatus('error', 'Connection lost');
-                                console.log('❌ Lost connection to CometAI server');
+                            const response = await fetch(`${this.apiUrl}/health`, {
+                                signal: controller.signal,
+                                cache: 'no-cache',
+                                headers: {
+                                    'Cache-Control': 'no-cache',
+                                    'Pragma': 'no-cache'
+                                }
+                            });
+                            
+                            clearTimeout(timeoutId);
+                            
+                            if (response.ok) {
+                                const data = await response.json();
+                                if (data.model_loaded && !this.isConnected) {
+                                    // Reconnected!
+                                    this.isConnected = true;
+                                    this.reconnectAttempts = 0;
+                                    this.updateStatus('ready', 'Connected & Ready');
+                                    console.log('✅ Reconnected to CometAI server');
+                                }
+                                // Don't change status if already connected and model is loaded
                             }
                         } catch (error) {
-                            if (this.isConnected) {
-                                this.isConnected = false;
-                                this.updateStatus('error', 'Connection lost');
-                                console.log('❌ Lost connection to CometAI server');
+                            // Only show error if we were previously connected
+                            if (this.isConnected && error.name !== 'AbortError') {
+                                console.log('⚠️ Health check failed, but keeping connection status');
+                                // Don't immediately disconnect on health check failure
+                                // Wait for actual API calls to fail before disconnecting
                             }
                         }
                     }
-                }, 30000);
+                }, 120000); // Check every 2 minutes instead of 30 seconds
                 
                 // Cleanup on page unload
                 window.addEventListener('beforeunload', () => {
@@ -697,6 +722,9 @@
                 this.updateStatus('loading', 'Generating response...');
                 
                 try {
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 60000); // 60 second timeout for chat
+                    
                     const response = await fetch(`${this.apiUrl}/chat`, {
                         method: 'POST',
                         headers: {
@@ -707,8 +735,11 @@
                             session_id: this.sessionId,
                             max_tokens: 512,
                             temperature: 0.7
-                        })
+                        }),
+                        signal: controller.signal
                     });
+                    
+                    clearTimeout(timeoutId);
                     
                     const data = await response.json();
                     
@@ -727,8 +758,18 @@
                     }
                 } catch (error) {
                     this.hideTypingIndicator();
-                    this.showError(`Network error: ${error.message}`);
-                    this.updateStatus('error', 'Network error');
+                    
+                    if (error.name === 'AbortError') {
+                        this.showError('Request timed out. Please try again.');
+                        this.updateStatus('error', 'Request timeout');
+                    } else if (error.message.includes('Failed to fetch')) {
+                        this.isConnected = false;
+                        this.showError('Connection lost. Click "Reconnect" to try again.');
+                        this.updateStatus('error', 'Connection lost');
+                    } else {
+                        this.showError(`Network error: ${error.message}`);
+                        this.updateStatus('error', 'Network error');
+                    }
                 } finally {
                     this.isGenerating = false;
                     this.sendBtn.disabled = false;
