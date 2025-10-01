@@ -496,6 +496,12 @@
         // Chat Interface JavaScript
         class CometAIChat {
             constructor() {
+                // Debug: Log how we're accessing the page
+                console.log('🔍 CometAI Chat Initializing...');
+                console.log('📍 Current URL:', window.location.href);
+                console.log('🌐 Hostname:', window.location.hostname);
+                console.log('📄 Referrer:', document.referrer);
+                
                 // Check if we're accessing from another device
                 const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
                 const isLocalNetwork = window.location.hostname.startsWith('192.168.') || window.location.hostname.startsWith('10.') || window.location.hostname.startsWith('172.');
@@ -510,6 +516,8 @@
                     // Production/cloud - use relative URLs
                     this.apiUrl = window.location.origin + '/api';
                 }
+                
+                console.log('🔗 API URL:', this.apiUrl);
                 
                 this.sessionId = null;
                 this.isConnected = false;
@@ -849,12 +857,12 @@
         }
         
         // Global functions for buttons
-        let chatInstance;
+        // chatInstance will be stored on window object
         
         async function clearChat() {
-            if (chatInstance && chatInstance.sessionId) {
+            if (window.chatInstance && window.chatInstance.sessionId) {
                 try {
-                    await fetch(`${chatInstance.apiUrl}/chat/clear/${chatInstance.sessionId}`, {
+                    await fetch(`${window.chatInstance.apiUrl}/chat/clear/${window.chatInstance.sessionId}`, {
                         method: 'DELETE'
                     });
                 } catch (error) {
@@ -863,7 +871,7 @@
             }
             
             // Clear UI
-            chatInstance.chatMessages.innerHTML = `
+            window.chatInstance.chatMessages.innerHTML = `
                 <div class="welcome-message">
                     <h3>Chat Cleared! 🧹</h3>
                     <p>Ready for a fresh conversation.</p>
@@ -873,8 +881,8 @@
         }
         
         async function newChat() {
-            if (chatInstance) {
-                await chatInstance.startNewSession();
+            if (window.chatInstance) {
+                await window.chatInstance.startNewSession();
                 await clearChat();
             }
         }
@@ -884,23 +892,23 @@
         }
         
         function sendMessage() {
-            if (chatInstance) {
-                chatInstance.sendMessage();
+            if (window.chatInstance) {
+                window.chatInstance.sendMessage();
             }
         }
         
         async function reconnectToServer() {
-            if (chatInstance) {
+            if (window.chatInstance) {
                 const reconnectBtn = document.getElementById('reconnectBtn');
                 const originalText = reconnectBtn.innerHTML;
                 reconnectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reconnecting...';
                 reconnectBtn.disabled = true;
                 
                 // Reset reconnection attempts
-                chatInstance.reconnectAttempts = 0;
+                window.chatInstance.reconnectAttempts = 0;
                 
                 // Try to establish connection
-                await chatInstance.establishConnection();
+                await window.chatInstance.establishConnection();
                 
                 // Reset button
                 reconnectBtn.innerHTML = originalText;
@@ -909,9 +917,25 @@
         }
         
         // Initialize chat when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            chatInstance = new CometAIChat();
-        });
+        // Use immediate execution to avoid conflicts with other DOMContentLoaded listeners
+        (function() {
+            // Prevent multiple instances
+            if (window.chatInstance) {
+                console.log('⚠️ Chat instance already exists, skipping initialization');
+                return;
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', () => {
+                    if (!window.chatInstance) {
+                        window.chatInstance = new CometAIChat();
+                    }
+                });
+            } else {
+                // Document already loaded
+                window.chatInstance = new CometAIChat();
+            }
+        })();
     </script>
 </body>
 </html>
