@@ -303,6 +303,15 @@
             }
         }
 
+        .fa-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
         .welcome-message {
             text-align: center;
             padding: 40px 20px;
@@ -459,6 +468,9 @@
                     <button class="chat-control-btn" onclick="newChat()">
                         <i class="fas fa-plus"></i> New Chat
                     </button>
+                    <button class="chat-control-btn" onclick="reconnectToServer()" id="reconnectBtn">
+                        <i class="fas fa-sync-alt"></i> Reconnect
+                    </button>
                     <button class="chat-control-btn" onclick="toggleSettings()">
                         <i class="fas fa-cog"></i> Settings
                     </button>
@@ -502,6 +514,11 @@
                 this.sessionId = null;
                 this.isConnected = false;
                 this.isGenerating = false;
+                this.reconnectAttempts = 0;
+                this.maxReconnectAttempts = 5;
+                this.reconnectInterval = 3000; // 3 seconds
+                this.healthCheckInterval = null;
+                this.connectionCheckInterval = null;
                 
                 // DOM elements
                 this.chatMessages = document.getElementById('chatMessages');
@@ -516,8 +533,8 @@
             }
             
             async init() {
-                // Check server status
-                await this.checkServerStatus();
+                // Check server status and establish connection
+                await this.establishConnection();
                 
                 // Setup event listeners
                 this.setupEventListeners();
@@ -527,6 +544,9 @@
                 
                 // Auto-resize textarea
                 this.setupAutoResize();
+                
+                // Start persistent connection monitoring
+                this.startConnectionMonitoring();
             }
             
             setupEventListeners() {
@@ -554,26 +574,78 @@
                 textarea.style.height = Math.min(textarea.scrollHeight, 120) + 'px';
             }
             
-            async checkServerStatus() {
+            async establishConnection() {
                 try {
+                    this.updateStatus('loading', 'Connecting to CometAI...');
+                    
                     const response = await fetch(`${this.apiUrl}/health`);
                     const data = await response.json();
                     
                     if (data.model_loaded) {
-                        this.updateStatus('ready', 'Ready to chat');
+                        this.updateStatus('ready', 'Connected & Ready');
                         this.isConnected = true;
+                        this.reconnectAttempts = 0;
+                        console.log('✅ CometAI server connected successfully');
                     } else if (data.model_loading) {
-                        this.updateStatus('loading', 'Loading model...');
-                        // Check again in 3 seconds
-                        setTimeout(() => this.checkServerStatus(), 3000);
+                        this.updateStatus('loading', 'Model loading...');
+                        // Check again in 2 seconds
+                        setTimeout(() => this.establishConnection(), 2000);
                     } else if (data.model_error) {
-                        this.updateStatus('error', `Error: ${data.model_error}`);
+                        this.updateStatus('error', `Model Error: ${data.model_error}`);
+                        this.isConnected = false;
                         this.showError(`Failed to load AI model: ${data.model_error}`);
                     }
                 } catch (error) {
-                    this.updateStatus('error', 'Server not available');
-                    this.showError('Cannot connect to CometAI server. Please check your connection or try refreshing the page.');
+                    this.isConnected = false;
+                    this.updateStatus('error', 'Connection failed');
+                    console.error('❌ Connection failed:', error);
+                    
+                    if (this.reconnectAttempts < this.maxReconnectAttempts) {
+                        this.reconnectAttempts++;
+                        this.updateStatus('loading', `Reconnecting... (${this.reconnectAttempts}/${this.maxReconnectAttempts})`);
+                        setTimeout(() => this.establishConnection(), this.reconnectInterval);
+                    } else {
+                        this.showError('Cannot connect to CometAI server. Please check your connection or try refreshing the page.');
+                    }
                 }
+            }
+            
+            startConnectionMonitoring() {
+                // Periodic health checks every 30 seconds
+                this.healthCheckInterval = setInterval(async () => {
+                    if (!this.isGenerating) { // Don't check during generation
+                        try {
+                            const response = await fetch(`${this.apiUrl}/health`);
+                            const data = await response.json();
+                            
+                            if (data.model_loaded && !this.isConnected) {
+                                // Reconnected!
+                                this.isConnected = true;
+                                this.reconnectAttempts = 0;
+                                this.updateStatus('ready', 'Connected & Ready');
+                                console.log('✅ Reconnected to CometAI server');
+                            } else if (!data.model_loaded && this.isConnected) {
+                                // Lost connection
+                                this.isConnected = false;
+                                this.updateStatus('error', 'Connection lost');
+                                console.log('❌ Lost connection to CometAI server');
+                            }
+                        } catch (error) {
+                            if (this.isConnected) {
+                                this.isConnected = false;
+                                this.updateStatus('error', 'Connection lost');
+                                console.log('❌ Lost connection to CometAI server');
+                            }
+                        }
+                    }
+                }, 30000);
+                
+                // Cleanup on page unload
+                window.addEventListener('beforeunload', () => {
+                    if (this.healthCheckInterval) {
+                        clearInterval(this.healthCheckInterval);
+                    }
+                });
             }
             
             updateStatus(status, text) {
@@ -773,6 +845,25 @@
         function sendMessage() {
             if (chatInstance) {
                 chatInstance.sendMessage();
+            }
+        }
+        
+        async function reconnectToServer() {
+            if (chatInstance) {
+                const reconnectBtn = document.getElementById('reconnectBtn');
+                const originalText = reconnectBtn.innerHTML;
+                reconnectBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Reconnecting...';
+                reconnectBtn.disabled = true;
+                
+                // Reset reconnection attempts
+                chatInstance.reconnectAttempts = 0;
+                
+                // Try to establish connection
+                await chatInstance.establishConnection();
+                
+                // Reset button
+                reconnectBtn.innerHTML = originalText;
+                reconnectBtn.disabled = false;
             }
         }
         
