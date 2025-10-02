@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Terranova - Resume</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .resume-page {
+            background: white;
+            color: black;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            font-family: 'Inter', sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+        
+        /* PDF-specific improvements */
+        @media print {
+            .resume-page {
+                margin: 0;
+                padding: 0.5in;
+                max-width: none;
+                width: 100%;
+            }
+        }
+        
+        .resume-header {
+            text-align: left;
+            border-bottom: 2px solid #990000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resume-header h1 {
+            font-size: 18pt;
+            color: #990000;
+            margin: 0 0 0.25rem 0;
+            font-weight: 700;
+        }
+        
+        .resume-header p {
+            font-size: 11pt;
+            color: black;
+            margin: 0.1rem 0;
+        }
+        
+        /* Override orange colors with cardinal red for resumes */
+        :root {
+            --primary-color: #990000 !important;
+            --primary-dark: #660000 !important;
+        }
+        
+        .btn-primary, .btn-secondary {
+            background: #990000 !important;
+            border-color: #990000 !important;
+        }
+        
+        .btn-primary:hover, .btn-secondary:hover {
+            background: #660000 !important;
+            border-color: #660000 !important;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 10pt;
+        }
+        
+        .contact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: black;
+        }
+        
+        .contact-info i {
+            color: #990000;
+            width: 16px;
+        }
+        
+        .resume-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .resume-section h2 {
+            color: #990000;
+            border-bottom: 1px solid #990000;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            font-size: 14pt;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .resume-item {
+            margin-bottom: 1rem;
+        }
+        
+        .resume-item h3 {
+            color: black;
+            margin: 0 0 0.25rem 0;
+            font-size: 12pt;
+            font-weight: 600;
+        }
+        
+        .resume-item .company {
+            font-weight: 600;
+            color: black;
+            margin-bottom: 0.25rem;
+            font-size: 11pt;
+        }
+        
+        .resume-item .date {
+            color: black;
+            font-style: italic;
+            margin-bottom: 0.25rem;
+            font-size: 10pt;
+        }
+        
+        .resume-item p {
+            margin: 0.25rem 0;
+            font-size: 10pt;
+            text-align: justify;
+        }
+        
+        .resume-item ul {
+            margin: 0.25rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .resume-item li {
+            margin-bottom: 0.25rem;
+            font-size: 10pt;
+        }
+        
+        .objective {
+            margin-bottom: 1.5rem;
+            font-size: 11pt;
+            text-align: justify;
+            line-height: 1.4;
+        }
+        
+        @media print {
+            .resume-page {
+                margin: 0;
+                padding: 0.5in;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-page">
+        <div class="resume-header">
+            <h1>JOSHUA TERRANOVA</h1>
+            <div class="contact-info">
+                <span><i class="fas fa-envelope"></i> jjt_373@usc.edu</span>
+                <span><i class="fas fa-phone"></i> 818.515.9043</span>
+                <span><i class="fab fa-linkedin"></i> linkedin.com/in/joshua-terranova-90b5122ab</span>
+                <span><i class="fas fa-envelope"></i> joshterranova26@gmail.com</span>
+                <span><i class="fab fa-github"></i> github.com/thatrandomaslandev</span>
+            </div>
+        </div>
+
+        <div class="objective">
+            <strong>OBJECTIVE:</strong> A passionate and driven problem-solver with a strong foundation in programming, AI/ML, and network architecture. Seeking a software engineering internship to learn, contribute to a collaborative team, and develop innovative solutions that push the boundaries of technology.
+        </div>
+
+        <div class="resume-section">
+            <h2>EDUCATION</h2>
+            <div class="resume-item">
+                <h3>University of Southern California (USC)</h3>
+                <p>Bachelor of Science in Computer Science (Expected Graduation: 2028)</p>
+            </div>
+            <div class="resume-item">
+                <h3>Los Angeles Mission College (LAMC)</h3>
+                <p>Associate's Degree - Mathematics (Spring 2025)</p>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>RESEARCH AND WORK EXPERIENCES</h2>
+            
+            <div class="resume-item">
+                <h3>NASA Lucy Student Pipeline Accelerator and Competency Enabler (L'SPACE)</h3>
+                <div class="company">NASA Proposal Writing and Evaluation Experience (NPWEE) Software Engineer Intern</div>
+                <div class="date">May - August 2025 (4 months)</div>
+                <ul>
+                    <li>Authored key technical sections—including Technological Readiness Level (TRL) and Key Performance Parameters—for a comprehensive 14-page NASA Technical Proposal on a confidential mission project.</li>
+                    <li>Served on a NASA Evaluation and Review Panel to assess various project proposals and ensure alignment with established technical standards.</li>
+                    <li>Collaborated with a team of engineers and Subject Matter Experts (SMEs) to master the entire NASA space-related proposal creation and evaluation process.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>NASA College Aerospace Scholars</h3>
+                <div class="company">Missions 1 and 2 Intern and Alumni</div>
+                <div class="date">Jan - May 2025 (5 months)</div>
+                <ul>
+                    <li>Analyzed and presented on NASA's Aeronautics Research Mission Directorate (ARMD) initiatives, exploring the agency's key research and missions.</li>
+                    <li>Collaborated with a team on a simulated lunar mission, designing a rover and defining mission objectives to address specific engineering challenges.</li>
+                    <li>Authored weekly status reports and research briefs, culminating in a final presentation of the team's mission proposal to a panel of NASA engineers and educators.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Artificial Intelligence and Semiconductor Chips Summer Program (AI-SCSP) and Artificial Intelligence Los Angeles - Cohort 5</h3>
+                <div class="company">AI/ML Software Engineer Participant</div>
+                <div class="date">June - July 2025 (2 months)</div>
+                <ul>
+                    <li>Developed a deep learning model in Python and PyTorch that achieved a sub-1% error rate in identifying pneumonia progression.</li>
+                    <li>Contributed to a large-scale project team of nine engineers, leading the validation and optimization of multiple machine learning models for medical diagnostics.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>TOYOTA-CSUN Engineering Digital Design Competition</h3>
+                <div class="company">Participant</div>
+                <div class="date">Mar - May 2025 (3 months)</div>
+                <ul>
+                    <li>Conceptualized and developed a modular attachment system for automated forklifts in Autodesk Fusion 360.</li>
+                    <li>Conducted advanced simulations to validate the design's functionality and ensure optimal strength-to-weight ratio for high-performance prototyping.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Computational Research Access Network (CRANE)</h3>
+                <div class="company">CRANE Scholar/Researcher</div>
+                <div class="date">Jan - May 2025 (5 months)</div>
+                <ul>
+                    <li>Developed basic physics simulations using Python and MATLAB to model and visualize complex physical phenomena.</li>
+                    <li>Explored and applied Monte Carlo simulations to analyze physical systems and presented key findings.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Civil Air Patrol (CAP)</h3>
+                <div class="company">Senior Cadet</div>
+                <div class="date">Sept - Present</div>
+                <ul>
+                    <li>Secured networks and mitigated cyber threats as a key member of a team in multiple CyberPatriots competitions.</li>
+                    <li>Applied advanced concepts in drone and rocketry technology by building and testing prototypes at the Aerospace Education STEM Academy (AESA).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>SKILLS</h2>
+            <div class="resume-item">
+                <p><strong>Programming Languages:</strong> Python, C++, Java, JavaScript, HTML5/CSS3</p>
+                <p><strong>Software Tools:</strong> Swift, Git/Github, Arduino, PyTorch, Jupyter Notebook, Kaggle, Fusion 360, Blender, Autodesk Tinker CAD, Visual Studio Code</p>
+                <p><strong>Other Skills:</strong> 3D Modeling/Printing, Rocketry, and Simulation</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

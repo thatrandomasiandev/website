@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Terranova - Google Software Engineer Resume</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .resume-page {
+            background: white !important;
+            color: black !important;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            font-family: 'Inter', sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+        
+        /* Force all text to be black */
+        .resume-page * {
+            color: black !important;
+        }
+        
+        /* Except for specific elements that should have their own colors */
+        .resume-tag {
+            color: white !important;
+        }
+        
+        /* PDF-specific improvements */
+        @media print {
+            .resume-page {
+                margin: 0;
+                padding: 0.5in;
+                max-width: none;
+                width: 100%;
+            }
+        }
+        
+        .resume-header {
+            text-align: left;
+            border-bottom: 2px solid #990000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resume-header h1 {
+            font-size: 18pt;
+            color: black;
+            margin: 0 0 0.25rem 0;
+            font-weight: 700;
+        }
+        
+        .resume-tag {
+            background: #4285f4;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 10pt;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Override orange colors with cardinal red for resumes */
+        :root {
+            --primary-color: #990000 !important;
+            --primary-dark: #660000 !important;
+        }
+        
+        .btn-primary, .btn-secondary {
+            background: #990000 !important;
+            border-color: #990000 !important;
+        }
+        
+        .btn-primary:hover, .btn-secondary:hover {
+            background: #660000 !important;
+            border-color: #660000 !important;
+        }
+        
+        .resume-header p {
+            font-size: 11pt;
+            color: black;
+            margin: 0.1rem 0;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 10pt;
+        }
+        
+        .contact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: black;
+        }
+        
+        .contact-info i {
+            color: black;
+            width: 16px;
+        }
+        
+        .resume-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .resume-section h2 {
+            color: black;
+            border-bottom: 1px solid #990000;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            font-size: 14pt;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .resume-item {
+            margin-bottom: 1rem;
+        }
+        
+        .resume-item h3 {
+            color: black;
+            margin: 0 0 0.25rem 0;
+            font-size: 12pt;
+            font-weight: 600;
+        }
+        
+        .resume-item .company {
+            font-weight: 600;
+            color: black;
+            margin-bottom: 0.25rem;
+            font-size: 11pt;
+        }
+        
+        .resume-item .date {
+            color: #666;
+            font-size: 10pt;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resume-item ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .resume-item li {
+            margin-bottom: 0.25rem;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+        
+        .objective {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #990000;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .skill-category {
+            background-color: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 4px;
+        }
+        
+        .skill-category h4 {
+            color: black;
+            margin: 0 0 0.5rem 0;
+            font-size: 11pt;
+            font-weight: 600;
+        }
+        
+        .skill-category p {
+            margin: 0;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            .resume-page {
+                margin: 0;
+                padding: 0.5in;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-page">
+        <div class="resume-header">
+            <div class="resume-tag">Google Software Engineer</div>
+            <h1>JOSHUA TERRANOVA</h1>
+            <div class="contact-info">
+                <span><i class="fas fa-envelope"></i> jjt_373@usc.edu</span>
+                <span><i class="fas fa-phone"></i> 818.515.9043</span>
+                <span><i class="fab fa-linkedin"></i> linkedin.com/in/joshua-terranova-90b5122ab</span>
+                <span><i class="fas fa-envelope"></i> joshterranova26@gmail.com</span>
+                <span><i class="fab fa-github"></i> github.com/thatrandomasiandev</span>
+            </div>
+        </div>
+
+        <div class="objective">
+            <strong>OBJECTIVE:</strong> Seeking a Software Engineering Internship at Google to apply my expertise in algorithms, data structures, and system design to solve complex computer science challenges. I am passionate about developing scalable, distributed software systems and contributing to projects that advance the state of the art in computing while impacting billions of users globally.
+        </div>
+
+        <div class="resume-section">
+            <h2>EDUCATION</h2>
+            <div class="resume-item">
+                <h3>University of Southern California (USC)</h3>
+                <p>Bachelor of Science in Computer Science (Expected Graduation: 05/28)</p>
+            </div>
+            <div class="resume-item">
+                <h3>Los Angeles Mission College (LAMC)</h3>
+                <p>Associate's Degree - Mathematics (Spring 2025)</p>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>SOFTWARE DEVELOPMENT PROJECTS</h2>
+            
+            <div class="resume-item">
+                <h3>CometAI - Local LLM Assistant</h3>
+                <div class="company">AI-Powered Software System</div>
+                <div class="date">2024 - Present</div>
+                <ul>
+                    <li>Developed a 7.6B parameter local language model using Python, PyTorch, and Transformers library</li>
+                    <li>Implemented efficient model loading and inference optimization techniques for resource-constrained environments</li>
+                    <li>Built scalable Flask API with RESTful endpoints and real-time streaming capabilities</li>
+                    <li>Designed modular architecture supporting multiple model backends and configuration management</li>
+                    <li>Optimized memory usage and inference speed through advanced caching and batch processing algorithms</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Autonomous Aircraft Flight Controller</h3>
+                <div class="company">Aerospace Software System</div>
+                <div class="date">2024</div>
+                <ul>
+                    <li>Developed real-time flight control algorithms using Python and aerospace engineering principles</li>
+                    <li>Implemented sensor fusion techniques and PID control loops for autonomous navigation</li>
+                    <li>Created simulation environment for testing and validation of flight control algorithms</li>
+                    <li>Applied advanced data structures for efficient trajectory planning and obstacle avoidance</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Physics Simulation Software</h3>
+                <div class="company">Computational Research Platform</div>
+                <div class="date">2024 - 2025</div>
+                <ul>
+                    <li>Built Monte Carlo simulation framework using Python and MATLAB for large-scale physical systems analysis</li>
+                    <li>Implemented parallel computing techniques to reduce processing time by 60% through multiprocessing</li>
+                    <li>Developed automated data visualization and analysis tools with real-time performance monitoring</li>
+                    <li>Created modular software architecture ensuring scalability across different computing environments</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Medical Image Recognition System</h3>
+                <div class="company">AI/ML Research Project</div>
+                <div class="date">2025</div>
+                <ul>
+                    <li>Developed deep learning model achieving sub-1% error rate in pneumonia progression detection</li>
+                    <li>Implemented advanced algorithms for processing large-scale medical imaging datasets</li>
+                    <li>Created automated validation scripts and performance monitoring systems for model evaluation</li>
+                    <li>Applied data structures and algorithms for efficient image preprocessing and feature extraction</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Personal Website & Portfolio Platform</h3>
+                <div class="company">Full-Stack Web Application</div>
+                <div class="date">2024 - Present</div>
+                <ul>
+                    <li>Architected and developed full-stack web application using Python, JavaScript, HTML5, and CSS3</li>
+                    <li>Implemented secure authentication system and real-time chat functionality with WebSocket integration</li>
+                    <li>Built responsive design system with mobile-first approach and cross-browser compatibility</li>
+                    <li>Deployed scalable cloud infrastructure with automated CI/CD pipeline and monitoring systems</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>RESEARCH AND WORK EXPERIENCES</h2>
+            
+            <div class="resume-item">
+                <h3>NASA Lucy Student Pipeline Accelerator and Competency Enabler (L'SPACE)</h3>
+                <div class="company">NASA Proposal Writing and Evaluation Experience (NPWEE) Software Engineer Intern</div>
+                <div class="date">May - August 2025 (4 months)</div>
+                <ul>
+                    <li>Authored key technical sections—including Technological Readiness Level (TRL) and Key Performance Parameters—for a comprehensive 14-page NASA Technical Proposal on a confidential mission project.</li>
+                    <li>Served on a NASA Evaluation and Review Panel to assess various project proposals and ensure alignment with established technical standards.</li>
+                    <li>Collaborated with a team of engineers and Subject Matter Experts (SMEs) to master the entire NASA space-related proposal creation and evaluation process.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>NASA College Aerospace Scholars</h3>
+                <div class="company">Missions 1 and 2 Intern and Alumni</div>
+                <div class="date">Jan - May 2025 (5 months)</div>
+                <ul>
+                    <li>Analyzed and presented on NASA's Aeronautics Research Mission Directorate (ARMD) initiatives, exploring the agency's key research and missions.</li>
+                    <li>Collaborated with a team on a simulated lunar mission, designing a rover and defining mission objectives to address specific engineering challenges.</li>
+                    <li>Authored weekly status reports and research briefs, culminating in a final presentation of the team's mission proposal to a panel of NASA engineers and educators.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Artificial Intelligence and Semiconductor Chips Summer Program (AI-SCSP)</h3>
+                <div class="company">AI/ML Software Engineer Participant</div>
+                <div class="date">June - July 2025 (2 months)</div>
+                <ul>
+                    <li>Developed and deployed a deep learning model in Python and PyTorch that achieved a sub-1% error rate in identifying pneumonia progression, processing large-scale medical datasets.</li>
+                    <li>Collaborated with a team of nine engineers to design, test, and optimize multiple machine learning models, implementing automated validation scripts and performance monitoring systems.</li>
+                    <li>Applied advanced algorithms and data structures to efficiently process and analyze medical imaging data at scale.</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Computational Research Access Network (CRANE)</h3>
+                <div class="company">CRANE Scholar/Researcher</div>
+                <div class="date">Jan - May 2025 (5 months)</div>
+                <ul>
+                    <li>Developed physics simulation software using Python and MATLAB, implementing efficient algorithms to model complex physical phenomena and optimize computational performance.</li>
+                    <li>Created automated scripts for Monte Carlo simulations to analyze large-scale physical systems, reducing manual processing time by implementing parallel computing techniques.</li>
+                    <li>Designed and maintained software solutions for data visualization and analysis, ensuring scalability and reliability across different computing environments.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>TECHNICAL SKILLS</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>Programming Languages</h4>
+                    <p>Python, Java, JavaScript, C++, C, Go, TypeScript, Swift, HTML5, CSS3</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Algorithms & Data Structures</h4>
+                    <p>Algorithms, data structures, complexity analysis, optimization techniques</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Web Development</h4>
+                    <p>React, Node.js, Express.js, RESTful APIs, WebSocket, Flask, Django</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Machine Learning & AI</h4>
+                    <p>PyTorch, TensorFlow, Deep Learning, Computer Vision, NLP, Model Optimization</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Systems & Infrastructure</h4>
+                    <p>Linux/Unix, Docker, AWS, Git/GitHub, CI/CD, Distributed Systems</p>
+                </div>
+                <div class="skill-category">
+                    <h4>Database & Storage</h4>
+                    <p>MongoDB, MySQL, SQLite, Database Design, Query Optimization</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

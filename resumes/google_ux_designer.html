@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joshua Terranova - Google UX Designer Resume</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .resume-page {
+            background: white;
+            color: black;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 0.5in;
+            font-family: 'Inter', sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            box-sizing: border-box;
+            overflow: visible;
+        }
+        
+        /* PDF-specific improvements */
+        @media print {
+            .resume-page {
+                margin: 0;
+                padding: 0.5in;
+                max-width: none;
+                width: 100%;
+            }
+        }
+        
+        .resume-header {
+            text-align: left;
+            border-bottom: 2px solid #990000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .resume-header h1 {
+            font-size: 18pt;
+            color: #990000;
+            margin: 0 0 0.25rem 0;
+            font-weight: 700;
+        }
+        
+        .resume-tag {
+            background: #4285f4;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 10pt;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Override orange colors with cardinal red for resumes */
+        :root {
+            --primary-color: #990000 !important;
+            --primary-dark: #660000 !important;
+        }
+        
+        .btn-primary, .btn-secondary {
+            background: #990000 !important;
+            border-color: #990000 !important;
+        }
+        
+        .btn-primary:hover, .btn-secondary:hover {
+            background: #660000 !important;
+            border-color: #660000 !important;
+        }
+        
+        .resume-header p {
+            font-size: 11pt;
+            color: black;
+            margin: 0.1rem 0;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 10pt;
+        }
+        
+        .contact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+        }
+        
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: black;
+        }
+        
+        .contact-info i {
+            color: #990000;
+            width: 16px;
+        }
+        
+        .resume-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .resume-section h2 {
+            color: #990000;
+            border-bottom: 1px solid #990000;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            font-size: 14pt;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .resume-item {
+            margin-bottom: 1rem;
+        }
+        
+        .resume-item h3 {
+            color: black;
+            margin: 0 0 0.25rem 0;
+            font-size: 12pt;
+            font-weight: 600;
+        }
+        
+        .resume-item .company {
+            font-weight: 600;
+            color: black;
+            margin-bottom: 0.25rem;
+            font-size: 11pt;
+        }
+        
+        .resume-item .date {
+            color: #666;
+            font-size: 10pt;
+            margin-bottom: 0.5rem;
+        }
+        
+        .resume-item ul {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+        }
+        
+        .resume-item li {
+            margin-bottom: 0.25rem;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+        
+        .objective {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #990000;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+        
+        .portfolio-highlight {
+            background-color: #f8f9fa;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid #990000;
+            border-radius: 4px;
+        }
+        
+        .portfolio-highlight h4 {
+            color: #990000;
+            margin: 0 0 0.5rem 0;
+            font-size: 11pt;
+            font-weight: 600;
+        }
+        
+        .portfolio-highlight p {
+            margin: 0;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+        
+        .design-tools {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .tool-category {
+            background-color: #f8f9fa;
+            padding: 0.75rem;
+            border-radius: 4px;
+        }
+        
+        .tool-category h4 {
+            color: #990000;
+            margin: 0 0 0.5rem 0;
+            font-size: 11pt;
+            font-weight: 600;
+        }
+        
+        .tool-category p {
+            margin: 0;
+            font-size: 10pt;
+            line-height: 1.3;
+        }
+        
+        @media print {
+            .resume-page {
+                margin: 0;
+                padding: 0.5in;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resume-page">
+        <div class="resume-header">
+            <div class="resume-tag">Google UX Designer</div>
+            <h1>JOSHUA TERRANOVA</h1>
+            <div class="contact-info">
+                <span><i class="fas fa-envelope"></i> jjt_373@usc.edu</span>
+                <span><i class="fas fa-phone"></i> 818.515.9043</span>
+                <span><i class="fab fa-linkedin"></i> linkedin.com/in/joshua-terranova-90b5122ab</span>
+                <span><i class="fas fa-envelope"></i> joshterranova26@gmail.com</span>
+                <span><i class="fab fa-github"></i> github.com/thatrandomasiandev</span>
+            </div>
+        </div>
+
+        <div class="objective">
+            <strong>OBJECTIVE:</strong> Seeking a UX/UI Designer Internship at Google to create intuitive, accessible, and inspiring user experiences that impact millions of users worldwide. I am passionate about transforming complex tasks into elegant solutions through thoughtful design, user research, and collaborative problem-solving.
+        </div>
+
+        <div class="resume-section">
+            <h2>EDUCATION</h2>
+            <div class="resume-item">
+                <h3>University of Southern California (USC)</h3>
+                <p>Bachelor of Science in Computer Science (Expected Graduation: 05/28)</p>
+                <div class="portfolio-highlight">
+                    <h4>Design Focus Areas:</h4>
+                    <p>Human-Computer Interaction, User Experience Design, Interface Design, Visual Design, Interaction Design</p>
+                </div>
+            </div>
+            <div class="resume-item">
+                <h3>Los Angeles Mission College (LAMC)</h3>
+                <p>Associate's Degree - Mathematics (Spring 2025)</p>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>DESIGN PORTFOLIO & PROJECTS</h2>
+            
+            <div class="resume-item">
+                <h3>Personal Website & Portfolio Platform</h3>
+                <div class="company">Full-Stack Design & Development</div>
+                <div class="date">2024 - Present</div>
+                <ul>
+                    <li>Designed and developed responsive user interface using modern UX principles and mobile-first design approach</li>
+                    <li>Created intuitive navigation system with smooth animations and interactive hover effects for enhanced user engagement</li>
+                    <li>Implemented accessible design patterns ensuring WCAG compliance and inclusive user experience</li>
+                    <li>Designed cohesive visual identity with consistent typography, color schemes, and spacing throughout the platform</li>
+                    <li>Prototyped and tested user flows to optimize conversion rates and user satisfaction</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>CometAI - AI Chat Interface Design</h3>
+                <div class="company">AI-Powered Web Application</div>
+                <div class="date">2024 - Present</div>
+                <ul>
+                    <li>Designed intuitive chat interface with real-time message streaming and dynamic UI updates</li>
+                    <li>Created engaging visual elements including animated loading states and interactive feedback systems</li>
+                    <li>Developed responsive design patterns ensuring optimal user experience across desktop and mobile devices</li>
+                    <li>Designed user-friendly onboarding flow and help documentation for complex AI functionality</li>
+                    <li>Implemented accessibility features including keyboard navigation and screen reader compatibility</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Discrete Math Calculator Interface</h3>
+                <div class="company">Educational Web Application</div>
+                <div class="date">2024</div>
+                <ul>
+                    <li>Designed user-friendly interface for complex mathematical operations with clear visual feedback</li>
+                    <li>Created interactive data visualization components for set operations and mathematical concepts</li>
+                    <li>Developed responsive layout optimized for both desktop and tablet usage in educational environments</li>
+                    <li>Designed intuitive input validation and error handling with helpful user guidance</li>
+                    <li>Implemented progressive disclosure patterns to manage complexity while maintaining usability</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Architecture Portfolio Website</h3>
+                <div class="company">Creative Portfolio Platform</div>
+                <div class="date">2024</div>
+                <ul>
+                    <li>Designed visually striking portfolio interface showcasing architectural projects with emphasis on visual hierarchy</li>
+                    <li>Created smooth scrolling galleries, image lightboxes, and interactive project showcases</li>
+                    <li>Developed mobile-optimized layout ensuring excellent user experience across all device sizes</li>
+                    <li>Designed compelling call-to-action elements and contact forms to drive user engagement</li>
+                    <li>Implemented modern design trends while maintaining professional aesthetic appropriate for target audience</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Mobile App Design - Clipboard Manager</h3>
+                <div class="company">iOS Application Design</div>
+                <div class="date">2024</div>
+                <ul>
+                    <li>Designed native iOS interface using SwiftUI with focus on intuitive user interactions</li>
+                    <li>Created wireframes and high-fidelity prototypes for file management and clipboard functionality</li>
+                    <li>Developed consistent design system with reusable components and standardized spacing</li>
+                    <li>Designed user flows for complex file operations while maintaining simplicity and ease of use</li>
+                    <li>Implemented Apple Human Interface Guidelines and iOS design patterns for native feel</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>UX/UI DESIGN EXPERIENCE</h2>
+            
+            <div class="resume-item">
+                <h3>NASA Project Interface Design</h3>
+                <div class="company">L'SPACE Research Program</div>
+                <div class="date">May - August 2025</div>
+                <ul>
+                    <li>Designed user interfaces for NASA technical proposal systems and evaluation platforms</li>
+                    <li>Created wireframes and mockups for complex data visualization and reporting interfaces</li>
+                    <li>Collaborated with engineers and researchers to understand user needs and technical constraints</li>
+                    <li>Developed design solutions for technical documentation and proposal management workflows</li>
+                    <li>Conducted usability testing and iterative design improvements based on user feedback</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>AI/ML Research Interface Design</h3>
+                <div class="company">AI-SCSP Research Program</div>
+                <div class="date">June - July 2025</div>
+                <ul>
+                    <li>Designed interfaces for medical image analysis and machine learning model visualization</li>
+                    <li>Created intuitive dashboards for data scientists and researchers to interact with complex AI systems</li>
+                    <li>Developed user-centered design solutions for technical audiences while maintaining accessibility</li>
+                    <li>Designed data visualization components for presenting research findings and model performance metrics</li>
+                    <li>Collaborated with research team to ensure design solutions supported scientific workflows</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Educational Platform Design</h3>
+                <div class="company">Academic Project</div>
+                <div class="date">2024 - 2025</div>
+                <ul>
+                    <li>Designed user interfaces for physics simulation software and educational tools</li>
+                    <li>Created interactive learning experiences with engaging visual elements and clear information hierarchy</li>
+                    <li>Developed responsive design solutions for various screen sizes and learning environments</li>
+                    <li>Designed user flows for complex educational workflows while maintaining simplicity</li>
+                    <li>Implemented user testing methodologies to validate design decisions and improve usability</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>DESIGN SKILLS & TOOLS</h2>
+            <div class="design-tools">
+                <div class="tool-category">
+                    <h4>Design Tools</h4>
+                    <p>Figma, Adobe Creative Suite (Photoshop, Illustrator, InDesign), Sketch, Principle, InVision, Adobe XD</p>
+                </div>
+                <div class="tool-category">
+                    <h4>Prototyping & Animation</h4>
+                    <p>Figma Prototyping, Principle, After Effects, Lottie, CSS Animations, JavaScript Interactions</p>
+                </div>
+                <div class="tool-category">
+                    <h4>Web Technologies</h4>
+                    <p>HTML5, CSS3, JavaScript, React, SwiftUI, Responsive Design, CSS Grid, Flexbox</p>
+                </div>
+                <div class="tool-category">
+                    <h4>Design Principles</h4>
+                    <p>User-Centered Design, Accessibility (WCAG), Material Design, Human Interface Guidelines, Design Systems</p>
+                </div>
+                <div class="tool-category">
+                    <h4>Research & Testing</h4>
+                    <p>User Research, Usability Testing, Wireframing, User Journey Mapping, A/B Testing, Analytics</p>
+                </div>
+                <div class="tool-category">
+                    <h4>Collaboration</h4>
+                    <p>Cross-functional Teamwork, Design Reviews, Stakeholder Communication, Agile Methodologies</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="resume-section">
+            <h2>LEADERSHIP & COLLABORATION</h2>
+            
+            <div class="resume-item">
+                <h3>Civil Air Patrol (CAP)</h3>
+                <div class="company">Senior Cadet & Team Leader</div>
+                <div class="date">Sept - Present</div>
+                <ul>
+                    <li>Led cross-functional teams in cybersecurity competitions and aerospace education projects</li>
+                    <li>Developed leadership skills through mentoring junior cadets and coordinating team activities</li>
+                    <li>Collaborated with diverse teams to solve complex technical challenges and achieve project goals</li>
+                    <li>Demonstrated excellent communication skills through presentations and technical documentation</li>
+                    <li>Applied problem-solving methodologies to design solutions for real-world aerospace challenges</li>
+                </ul>
+            </div>
+
+            <div class="resume-item">
+                <h3>Research Team Collaboration</h3>
+                <div class="company">Multiple Research Programs</div>
+                <div class="date">2024 - Present</div>
+                <ul>
+                    <li>Collaborated with interdisciplinary teams of engineers, researchers, and scientists on complex projects</li>
+                    <li>Facilitated design reviews and user feedback sessions to improve product usability and functionality</li>
+                    <li>Presented design concepts and research findings to technical and non-technical stakeholders</li>
+                    <li>Worked closely with product managers and engineers to translate user needs into design solutions</li>
+                    <li>Demonstrated adaptability and communication skills across different project contexts and team dynamics</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
