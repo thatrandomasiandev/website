@@ -127,7 +127,7 @@ body {
     transition: var(--transition);
 }
 
-/* Hero Section */
+/* Hero Section - New Geometric Layout */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -136,6 +136,49 @@ body {
     overflow: hidden;
     background: var(--bg-primary);
     padding-top: 80px;
+}
+
+/* Geometric Background Elements */
+.geometric-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.geometric-shape {
+    position: absolute;
+    background: var(--primary-color);
+    opacity: 0.05;
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    right: 15%;
+    transform: rotate(45deg);
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 10%;
+    transform: rotate(-45deg);
+    background: var(--primary-dark);
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    left: 5%;
+    transform: rotate(30deg);
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
 }
 
 .hero::before {
@@ -151,7 +194,7 @@ body {
 
 .hero-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr;
     gap: 4rem;
     align-items: center;
     max-width: 1200px;
@@ -159,6 +202,145 @@ body {
     padding: 0 2rem;
     position: relative;
     z-index: 10;
+}
+
+/* New Hero Stats Grid */
+.hero-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary-color);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover::before {
+    transform: scaleX(1);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px var(--shadow-dark);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+/* New Hero Visual Grid */
+.image-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+    height: 400px;
+}
+
+.image-card {
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+}
+
+.image-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px var(--shadow-dark);
+}
+
+.image-card.primary {
+    grid-row: 1 / 3;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+}
+
+.image-card.secondary {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.image-card.tertiary {
+    background: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.hero-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tech-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.tech-item {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 80px;
+}
+
+.achievement-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-primary);
+}
+
+.achievement-badge i {
+    font-size: 2rem;
+}
+
+.achievement-badge span {
+    font-size: 0.9rem;
+    font-weight: 600;
 }
 
 .hero-badge {
@@ -452,11 +634,77 @@ body {
     font-weight: 400;
 }
 
-/* About Section */
+/* Section Dividers */
+.section-divider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: var(--bg-primary);
+    z-index: 1;
+}
+
+.diagonal-left {
+    clip-path: polygon(0 100%, 100% 0, 100% 100%);
+    background: var(--bg-secondary);
+}
+
+.diagonal-right {
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    background: var(--bg-secondary);
+}
+
+/* About Section - New Geometric Layout */
 .about {
     padding: 8rem 0;
     background: var(--bg-primary);
     position: relative;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.about-main {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-card.large {
+    padding: 3rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-card.large .card-accent {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    background: var(--primary-color);
+    opacity: 0.1;
+    clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .about-content {
@@ -628,13 +876,54 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Skills Preview Section */
+/* Skills Preview Section - New Geometric Layout */
 .skills-preview {
     padding: 8rem 0 6rem 0;
     background: var(--bg-primary);
     position: relative;
     scroll-margin-top: 100px;
     margin-top: 80px;
+}
+
+.skills-masonry {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.skill-card.primary {
+    grid-row: 1 / 3;
+    padding: 3rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-card.secondary {
+    padding: 2rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.skill-card.tertiary {
+    padding: 2rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+}
+
+.skill-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
 }
 
 .skills-preview::before {
@@ -713,13 +1002,47 @@ body {
     margin-top: 3rem;
 }
 
-/* Featured Projects Section */
+/* Featured Projects Section - New Geometric Layout */
 .featured-projects {
     padding: 6rem 0 6rem 0;
     background: var(--bg-secondary);
     position: relative;
     scroll-margin-top: 100px;
     margin-top: 0;
+}
+
+.projects-showcase {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.project-showcase.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.project-showcase.secondary {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.project-card.featured {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    background: var(--primary-color);
+    opacity: 0.1;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
 }
 
 .featured-projects::before {
@@ -2447,6 +2770,36 @@ body {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 3rem;
+    }
+    
+    .image-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        height: auto;
+        gap: 1rem;
+    }
+    
+    .image-card.primary {
+        grid-row: auto;
+    }
+    
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .skills-masonry {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+    }
+    
+    .skill-card.primary {
+        grid-row: auto;
+    }
+    
+    .projects-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
     
     .hero-title {

@@ -46,8 +46,14 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - New Geometric Layout -->
     <section id="home" class="hero">
+        <div class="geometric-bg">
+            <div class="geometric-shape shape-1"></div>
+            <div class="geometric-shape shape-2"></div>
+            <div class="geometric-shape shape-3"></div>
+        </div>
+        
         <div class="hero-container">
             <div class="hero-content">
                 <div class="hero-badge">
@@ -57,7 +63,6 @@
                     </h1>
                     <p class="hero-subtitle">Computer Science Student @ USC</p>
                     <p class="hero-description">Passionate about creating innovative software solutions and exploring the intersection of technology and creativity. I turn complex problems into elegant, user-friendly applications.</p>
-                    <!-- GitHub language detection fix -->
                     
                     <div class="hero-buttons">
                         <a href="about.html" class="btn btn-primary">
@@ -69,36 +74,55 @@
                             <i class="fas fa-envelope"></i>
                         </a>
                     </div>
-                    <div class="hero-stats">
-                        <div class="hero-stat">
-                            <span class="hero-stat-number">40+</span>
-                            <span class="hero-stat-label">Projects</span>
+                </div>
+                
+                <div class="hero-stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number">40+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Years</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">6+</div>
+                        <div class="stat-label">Internships</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-visual">
+                <div class="image-grid">
+                    <div class="image-card primary">
+                        <img src="assets/images/div/7.jpeg" alt="Lake Tahoe" class="hero-image">
+                    </div>
+                    <div class="image-card secondary">
+                        <div class="tech-stack">
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">Swift</span>
+                            <span class="tech-item">React</span>
                         </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-number">3+</span>
-                            <span class="hero-stat-label">Years</span>
-                        </div>
-                        <div class="hero-stat">
-                            <span class="hero-stat-number">6+</span>
-                            <span class="hero-stat-label">Internships</span>
+                    </div>
+                    <div class="image-card tertiary">
+                        <div class="achievement-badge">
+                            <i class="fas fa-trophy"></i>
+                            <span>NASA Intern</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="hero-visual">
-                <div class="hero-image-container">
-                    <img src="assets/images/div/7.jpeg" alt="Lake Tahoe" class="hero-tahoe-image">
-                </div>
-            </div>
         </div>
+        
         <div class="scroll-indicator">
             <div class="scroll-arrow"></div>
             <span>Scroll to explore</span>
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section - New Geometric Layout -->
     <section id="about" class="about">
+        <div class="section-divider diagonal-left"></div>
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">
@@ -108,39 +132,49 @@
                 <h2>Welcome to My World</h2>
                 <p>Get to know me beyond the code</p>
             </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <div class="about-card">
-                        <div class="about-card-icon">
-                            <i class="fas fa-user-graduate"></i>
+            
+            <div class="about-grid">
+                <div class="about-main">
+                    <div class="about-card large">
+                        <div class="card-header">
+                            <div class="about-card-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <h3>Who I Am</h3>
                         </div>
-                        <h3>Who I Am</h3>
                         <p>I'm Joshua Terranova, a Computer Science student at the University of Southern California. I'm passionate about technology, innovation, and creating solutions that make a difference in people's lives.</p>
-                    </div>
-                    
-                    <div class="about-card">
-                        <div class="about-card-icon">
-                            <i class="fas fa-rocket"></i>
-                        </div>
-                        <h3>What Drives Me</h3>
-                        <p>I love solving complex problems and turning innovative ideas into reality through code. Whether it's building applications, exploring new technologies, or contributing to open-source projects, I'm always excited to learn and create.</p>
-                    </div>
-                    
-                    <div class="about-card">
-                        <div class="about-card-icon">
-                            <i class="fas fa-heart"></i>
-                        </div>
-                        <h3>Beyond Coding</h3>
-                        <p>When I'm not immersed in code, you'll find me traveling to new places, playing tennis, experimenting with 3D printing, or simply enjoying a good cup of coffee while brainstorming my next project.</p>
+                        <div class="card-accent"></div>
                     </div>
                 </div>
-
+                
+                <div class="about-sidebar">
+                    <div class="about-card">
+                        <div class="card-header">
+                            <div class="about-card-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>What Drives Me</h3>
+                        </div>
+                        <p>I love solving complex problems and turning innovative ideas into reality through code.</p>
+                    </div>
+                    
+                    <div class="about-card">
+                        <div class="card-header">
+                            <div class="about-card-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h3>Beyond Coding</h3>
+                        </div>
+                        <p>Traveling, tennis, 3D printing, and coffee-fueled brainstorming sessions.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Preview Section -->
+    <!-- Skills Preview Section - New Geometric Layout -->
     <section id="skills-preview" class="skills-preview">
+        <div class="section-divider diagonal-right"></div>
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">
@@ -150,8 +184,9 @@
                 <h2>What I Do</h2>
                 <p>Technologies and tools I work with</p>
             </div>
-            <div class="skills-grid">
-                <div class="skill-card">
+            
+            <div class="skills-masonry">
+                <div class="skill-card primary">
                     <div class="skill-icon">
                         <i class="fas fa-code"></i>
                     </div>
@@ -162,19 +197,22 @@
                         <span>Python</span>
                         <span>HTML/CSS</span>
                     </div>
+                    <div class="skill-accent"></div>
                 </div>
-                <div class="skill-card">
+                
+                <div class="skill-card secondary">
                     <div class="skill-icon">
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <h3>Mobile Engineering</h3>
-                    <p>Engineering mobile applications for iOS and macOS. I mainly use Swift and SwiftUI to create applications that are centered around productivity and organization.</p>
+                    <p>Engineering mobile applications for iOS and macOS using Swift and SwiftUI.</p>
                     <div class="skill-tags">
                         <span>Swift</span>
                         <span>SwiftUI</span>
                     </div>
                 </div>
-                <div class="skill-card">
+                
+                <div class="skill-card tertiary">
                     <div class="skill-icon">
                         <i class="fas fa-cloud"></i>
                     </div>
@@ -186,14 +224,16 @@
                     </div>
                 </div>
             </div>
+            
             <div class="skills-cta">
                 <a href="skills.html" class="btn btn-secondary">View All Skills</a>
             </div>
         </div>
     </section>
 
-    <!-- Featured Projects Section -->
+    <!-- Featured Projects Section - New Geometric Layout -->
     <section id="featured-projects" class="featured-projects">
+        <div class="section-divider diagonal-left"></div>
         <div class="container">
             <div class="section-header">
                 <div class="section-badge">
@@ -203,58 +243,62 @@
                 <h2>Featured Projects</h2>
                 <p>A glimpse of my recent work</p>
             </div>
-            <div class="featured-projects-grid">
-                <div class="featured-project">
-                    <div class="project-image">
-                        <img src="assets/images/div/2.jpg" alt="Task Manager">
-                        <div class="project-overlay">
-                            <div class="project-content">
-                                <h3>Task Management App/Clipboard Manager</h3>
-                                
-                                <div class="project-tech">
-                                    <span>Swift</span>
-                                    <span>SwiftUI</span>
+            
+            <div class="projects-showcase">
+                <div class="project-showcase main">
+                    <div class="project-card featured">
+                        <div class="project-image">
+                            <img src="assets/images/div/2.jpg" alt="Task Manager">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Task Management App/Clipboard Manager</h3>
+                                    <div class="project-tech">
+                                        <span>Swift</span>
+                                        <span>SwiftUI</span>
+                                    </div>
+                                    <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
                                 </div>
-                                <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+                            </div>
+                        </div>
+                        <div class="project-accent"></div>
+                    </div>
+                </div>
+                
+                <div class="project-showcase secondary">
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/div/3.jpg" alt="Weather App">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Weather Forecast App</h3>
+                                    <div class="project-tech">
+                                        <span>React Native</span>
+                                        <span>Weather API</span>
+                                    </div>
+                                    <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="featured-project">
-                    <div class="project-image">
-                        <img src="assets/images/div/3.jpg" alt="Weather App">
-                        <div class="project-overlay">
-                            <div class="project-content">
-                                <h3>Weather Forecast App</h3>
-                                
-                                <div class="project-tech">
-                                    <span>React Native</span>
-                                    <span>Weather API</span>
-                                    <span>Geolocation</span>
+                    
+                    <div class="project-card">
+                        <div class="project-image">
+                            <img src="assets/images/div/9.jpg" alt="Architecture Portfolio">
+                            <div class="project-overlay">
+                                <div class="project-content">
+                                    <h3>Architecture Portfolio</h3>
+                                    <div class="project-tech">
+                                        <span>HTML5</span>
+                                        <span>CSS3</span>
+                                    </div>
+                                    <a href="https://thatrandomasiandev.github.io/Architecture/" class="project-link" target="_blank" rel="noopener">View Live Site</a>
                                 </div>
-                                <a href="https://github.com/thatrandomasiandev" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="featured-project">
-                    <div class="project-image">
-                        <img src="assets/images/div/9.jpg" alt="Architecture Portfolio">
-                        <div class="project-overlay">
-                            <div class="project-content">
-                                <h3>Architecture Portfolio</h3>
-                                
-                                <div class="project-tech">
-                                    <span>HTML5</span>
-                                    <span>CSS3</span>
-                                    <span>JavaScript</span>
-                                </div>
-                                <a href="https://thatrandomasiandev.github.io/Architecture/" class="project-link" target="_blank" rel="noopener">View Live Site</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            
             <div class="featured-projects-cta">
                 <a href="projects.html" class="btn btn-secondary">View All Projects</a>
             </div>
