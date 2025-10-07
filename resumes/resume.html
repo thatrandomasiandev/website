@@ -138,6 +138,7 @@
             margin: 0.25rem 0;
             font-size: 10pt;
             text-align: justify;
+            color: black;
         }
         
         .resume-item ul {
@@ -148,6 +149,7 @@
         .resume-item li {
             margin-bottom: 0.25rem;
             font-size: 10pt;
+            color: black;
         }
         
         .objective {
@@ -155,6 +157,7 @@
             font-size: 11pt;
             text-align: justify;
             line-height: 1.4;
+            color: black;
         }
         
         @media print {
@@ -165,9 +168,121 @@
             }
         }
     </style>
+    <style>
+        /* Disclaimer Modal Styles */
+        .disclaimer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .disclaimer-modal {
+            background: white;
+            max-width: 600px;
+            margin: 20px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            animation: slideUp 0.4s ease;
+        }
+
+        .disclaimer-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #990000, #660000);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: white;
+        }
+
+        .disclaimer-modal h2 {
+            color: #990000;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .disclaimer-modal p {
+            color: #333;
+            line-height: 1.8;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .disclaimer-btn {
+            background: #990000;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .disclaimer-btn:hover {
+            background: #660000;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(153, 0, 0, 0.3);
+        }
+
+        .resume-page.blurred {
+            filter: blur(20px);
+            pointer-events: none;
+            user-select: none;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="resume-page">
+    <!-- Disclaimer Modal -->
+    <div id="disclaimerOverlay" class="disclaimer-overlay">
+        <div class="disclaimer-modal">
+            <div class="disclaimer-icon">
+                <i class="fas fa-info-circle"></i>
+            </div>
+            <h2>Resume Disclaimer</h2>
+            <p>This resume is designed as a point of reference for employers and is not intended to be used for a specific job position.</p>
+            <p style="font-size: 14px; color: #666; margin-bottom: 20px;">Please contact me at <a href="mailto:jjt_373@usc.edu" style="color: #990000; font-weight: 600; text-decoration: none;"><strong>jjt_373@usc.edu</strong></a> or <a href="mailto:joshterranova26@gmail.com" style="color: #990000; font-weight: 600; text-decoration: none;"><strong>joshterranova26@gmail.com</strong></a> for job-specific resumes.</p>
+            <button class="disclaimer-btn" onclick="acceptDisclaimer()">I Understand</button>
+        </div>
+    </div>
+
+    <div class="resume-page blurred">
         <div class="resume-header">
             <h1>JOSHUA TERRANOVA</h1>
             <div class="contact-info">
@@ -270,5 +385,48 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Check if user has already accepted the disclaimer
+        function checkDisclaimer() {
+            const accepted = sessionStorage.getItem('resumeDisclaimerAccepted');
+            if (accepted === 'true') {
+                hideDisclaimer();
+            }
+        }
+
+        function acceptDisclaimer() {
+            // Store acceptance in session storage (lasts for the browser session)
+            sessionStorage.setItem('resumeDisclaimerAccepted', 'true');
+            hideDisclaimer();
+        }
+
+        function hideDisclaimer() {
+            const overlay = document.getElementById('disclaimerOverlay');
+            const resumePage = document.querySelector('.resume-page');
+            
+            // Fade out overlay
+            overlay.style.animation = 'fadeOut 0.3s ease';
+            setTimeout(() => {
+                overlay.classList.add('hidden');
+            }, 300);
+            
+            // Remove blur from resume
+            resumePage.classList.remove('blurred');
+        }
+
+        // Add fadeOut animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Check on page load
+        window.addEventListener('DOMContentLoaded', checkDisclaimer);
+    </script>
 </body>
 </html>
