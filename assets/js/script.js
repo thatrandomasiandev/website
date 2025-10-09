@@ -31,6 +31,37 @@ document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', 
     }
 }));
 
+// Project Filter Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const projects = document.querySelectorAll('.featured-project');
+    
+    if (filterChips.length > 0 && projects.length > 0) {
+        filterChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                // Remove active class from all chips
+                filterChips.forEach(c => c.classList.remove('active'));
+                // Add active class to clicked chip
+                chip.classList.add('active');
+                
+                const filter = chip.getAttribute('data-filter');
+                
+                // Filter projects with animation
+                projects.forEach((project, index) => {
+                    const category = project.getAttribute('data-category');
+                    
+                    if (filter === 'all' || category === filter) {
+                        project.classList.remove('hidden');
+                        project.style.animation = `fadeInUp 0.6s ease-out ${index * 0.1}s backwards`;
+                    } else {
+                        project.classList.add('hidden');
+                    }
+                });
+            });
+        });
+    }
+});
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {

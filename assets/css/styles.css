@@ -1259,6 +1259,50 @@ body {
     margin-top: 3rem;
 }
 
+/* Project Filter Chips - Google Material Design */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 1px 2px 0 var(--shadow-light);
+}
+
+.filter-chip:hover {
+    background: var(--bg-secondary);
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    box-shadow: 0 2px 4px 0 var(--shadow-light);
+    transform: translateY(-1px);
+}
+
+.filter-chip.active {
+    background: var(--primary-color);
+    color: #ffffff;
+    border-color: var(--primary-color);
+    box-shadow: 0 2px 4px 0 var(--shadow-medium);
+}
+
+.filter-chip i {
+    font-size: 1rem;
+}
+
 /* Featured Projects Section - New Geometric Layout */
 .featured-projects {
     padding: 6rem 0 6rem 0;
@@ -1266,6 +1310,12 @@ body {
     position: relative;
     scroll-margin-top: 100px;
     margin-top: 0;
+}
+
+.portfolio {
+    padding: 8rem 0 6rem 0;
+    background: var(--bg-primary);
+    min-height: 100vh;
 }
 
 .projects-showcase {
@@ -1712,12 +1762,23 @@ body {
 
 .featured-project {
     background: var(--bg-card);
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius-lg);
     overflow: hidden;
-    box-shadow: 0 4px 20px var(--shadow-dark);
+    box-shadow: 0 1px 2px 0 var(--shadow-light), 0 1px 3px 1px var(--shadow-light);
     transition: var(--transition);
     border: 1px solid var(--border-color);
+    animation: fadeInUp 0.6s ease-out backwards;
 }
+
+.featured-project:nth-child(1) { animation-delay: 0.1s; }
+.featured-project:nth-child(2) { animation-delay: 0.2s; }
+.featured-project:nth-child(3) { animation-delay: 0.3s; }
+.featured-project:nth-child(4) { animation-delay: 0.4s; }
+.featured-project:nth-child(5) { animation-delay: 0.5s; }
+.featured-project:nth-child(6) { animation-delay: 0.6s; }
+.featured-project:nth-child(7) { animation-delay: 0.7s; }
+.featured-project:nth-child(8) { animation-delay: 0.8s; }
+.featured-project:nth-child(9) { animation-delay: 0.9s; }
 
 /* Highlight Discrete Math tile */
 .featured-project .project-content h3 {
@@ -1738,8 +1799,12 @@ body {
 }
 
 .featured-project:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 25px 50px var(--shadow-dark);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px 0 var(--shadow-medium), 0 6px 20px 0 var(--shadow-light);
+}
+
+.featured-project.hidden {
+    display: none;
 }
 
 .project-image {
